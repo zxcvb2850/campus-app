@@ -1,0 +1,28 @@
+@tabBackground: #e9edec;
+@mainTextColor: #929292;
+@importantColor: #1791ff;
+@mainBackground: #2e9fff;
+@maskBackground: rgba(0, 0, 0, .5);
+@headerColor: #fff;
+@divisionLine: rgba(0, 0, 0, .1);
+
+@tabHeight: 50px;
+@headerHeight: 40px;
+
+@headerFontSize: 18px;
+@titleFontSize: 14px;
+@mainFontSize: 12px;
+
+
+.border-1px(@color) {
+  position: relative;
+  &:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    content: '';
+    width: 100%;
+    border-top: 1px solid @color;
+  }
+}

@@ -1,17 +1,25 @@
 <template>
   <div id="app">
-    <!--<router-view></router-view>-->
+    <tab></tab>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+  import tab from "components/tab/tab"
+
+  export default {
+    name: 'app',
+    components: {
+      tab
+    }
+  }
 </script>
 
 <style lang="less">
-  #app{
+  @import "~common/style/index";
+
+  #app {
 
   }
 </style>
