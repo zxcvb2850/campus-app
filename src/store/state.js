@@ -4,8 +4,7 @@
 const state = {
   username: "admin",
   password: "123456",
-  isLogin:false,
-  count: 8
+  isLogin: false
 }
 
 export default state;

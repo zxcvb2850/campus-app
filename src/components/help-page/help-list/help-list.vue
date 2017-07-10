@@ -1,10 +1,23 @@
 <template>
   <div class="help-list">
+    <div class="filter-part">
+      <p class="filter" @click="filterBtn">筛选</p>
+      <transition name="slide">
+        <div class="filter-condition" v-show="isFilter">
+          <scroll class="filter-wrapper" ref="filterWrapper">
+            <div>
+              <p>筛选条件</p>
+            </div>
+          </scroll>
+        </div>
+      </transition>
+    </div>
+    <v-mask @clickMask="hideMask" :isFilter="isFilter"></v-mask>
     <scroll class="help-wrapper">
       <ul>
         <li class="help-item">
           <div class="center">
-            <div class="user-icon"><img src="https://b-ssl.duitang.com/uploads/item/201606/18/20160618183732_HfmaL.jpeg"
+            <div class="user-icon"><img src="http://diy.qqjay.com/u2/2012/1216/e72b58f558f3c10d2f9aebea97a9add4.jpg"
                                         alt=""></div>
             <div class="demand">
               <h3 class="title">取快递</h3>
@@ -25,10 +38,31 @@
 
 <script>
   import Scroll from "base/scroll/scroll"
+  import VMask from "base/mask/mask"
 
   export default {
+    data(){
+      return {
+        isFilter: false
+      }
+    },
+    methods: {
+      _refreshFilter(){
+        if (this.isFilter) {
+          this.$refs.filterWrapper.refresh();
+        }
+      },
+      filterBtn(){
+        this.isFilter = true;
+        this._refreshFilter();
+      },
+      hideMask(isShow){
+        this.isFilter = !isShow;
+      }
+    },
     components: {
-      Scroll
+      Scroll,
+      VMask
     }
   }
 </script>
@@ -42,12 +76,49 @@
     bottom: 0;
     left: 0;
     right: 0;
+    .filter-part {
+      position: relative;
+      top: 0;
+      bottom: 0;
+      right: 20px;
+      .filter {
+        position: absolute;
+        top: -50px;
+        bottom: 0;
+        right: 0;
+        font-size: @titleFontSize;
+        font-weight: normal;
+        color: @headerColor;
+      }
+      .filter-condition {
+        padding: 0 20px;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 1000;
+        background-color: @tabBackground;
+        .filter-wrapper {
+          height: 100%;
+          overflow: hidden;
+        }
+      }
+      .slide-enter-active, .slide-leave-active {
+        transition: all .3s;
+      }
+      .slide-enter, .slide-leave-to {
+        transform: translate3d(100%, 0, 0);
+      }
+    }
     .help-wrapper {
       height: 100%;
       overflow: hidden;
       .help-item {
         padding: 10px;
         .border-1px(@divisionLine);
+        &:last-child {
+          .border-none;
+        }
         .center {
           display: flex;
           align-items: center;
@@ -101,7 +172,7 @@
             .icon-girl {
               color: #dc4883;
             }
-            .icon-boy{
+            .icon-boy {
               color: #487ef8;
             }
           }

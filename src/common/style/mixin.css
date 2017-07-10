@@ -1,0 +1,32 @@
+body,
+html {
+  line-height: 1;
+  font-family: 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif, 'Droid Sans Fallback';
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  color: #929292;
+}
+/*底部边框为1px*/
+/*最后一个底部没有边框*/
+.border-none:after {
+  display: none !important;
+}
+/*内部盒子*/
+.bor-sizing {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/*不换行*/
+/*清除浮动*/
+.clearfix {
+  display: inline-block;
+}
+.clearfix:after {
+  display: block;
+  content: '.';
+  height: 0;
+  line-height: 0;
+  clear: both;
+  visibility: hidden;
+}

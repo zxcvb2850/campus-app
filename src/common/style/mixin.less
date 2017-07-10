@@ -23,6 +23,7 @@ body, html {
   color: @mainTextColor;
 }
 
+/*底部边框为1px*/
 .border-1px(@color) {
   position: relative;
   &:after {
@@ -36,7 +37,14 @@ body, html {
   }
 }
 
-/**/
+/*最后一个底部没有边框*/
+.border-none {
+  &:after {
+    display: none !important
+  }
+}
+
+/*内部盒子*/
 .bor-sizing {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -48,4 +56,17 @@ body, html {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+
+/*清除浮动*/
+.clearfix {
+  display: inline-block;
+  &:after {
+    display: block;
+    content: '.';
+    height: 0;
+    line-height: 0;
+    clear: both;
+    visibility: hidden;
+  }
 }
