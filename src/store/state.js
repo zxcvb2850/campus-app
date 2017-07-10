@@ -1,8 +1,11 @@
 /**
- * Created by 大白胡子 on 2017/7/6.
+ * Created by wang on 2017/7/7.
  */
 const state = {
-    user: {}
+  username: "admin",
+  password: "123456",
+  isLogin:false,
+  count: 8
 }
 
-export default state
+export default state;

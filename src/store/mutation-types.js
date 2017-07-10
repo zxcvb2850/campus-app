@@ -1,4 +1,5 @@
 /**
- * Created by 大白胡子 on 2017/7/6.
+ * Created by wang on 2017/7/7.
  */
-export const SET_USER = 'SET_USER'
+export const SET_COUNT = 'SET_COUNT';
+export const SET_LOGIN = 'SET_LOGIN';

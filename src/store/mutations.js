@@ -1,12 +1,15 @@
 /**
- * Created by 大白胡子 on 2017/7/6.
+ * Created by wang on 2017/7/7.
  */
 import * as types from './mutation-types'
 
 const mutations = {
-  [types.SET_USER](state, user){
-    state.user = user
+  [types.SET_COUNT](state, count){
+    state.count = count
+  },
+  [types.SET_LOGIN](state, isLogin){
+    state.isLogin = isLogin
   }
 }
 
-export default mutations
+export default mutations;

@@ -1,4 +1,7 @@
 /**
- * Created by 大白胡子 on 2017/7/6.
+ * Created by wang on 2017/7/7.
  */
-export const user = state => state.user
+export const username = state => state.username
+export const password = state => state.password
+export const isLogin = state => state.isLogin
+export const count = state => state.count
