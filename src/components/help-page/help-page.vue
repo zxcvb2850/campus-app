@@ -5,17 +5,21 @@
       <p class="filter" @click="filterBtn">筛选</p>
     </m-header>
     <div class="nav">
-      <div class="nav-item">帮助</div>
-      <div class="nav-item">求助</div>
+      <router-link to="/helpPage/helpList" class="nav-item">帮助</router-link>
+      <router-link to="/helpPage/seekList" class="nav-item">求助</router-link>
     </div>
-    <scroll class="help-content">
       <div>
-
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
       </div>
-    </scroll>
     <transition name="slide">
       <div class="filter-condition" v-show="isFilter">
-        1234
+        <scroll class="filter-wrapper" ref="filterWrapper">
+          <div>
+            <p>筛选条件</p>
+          </div>
+        </scroll>
       </div>
     </transition>
     <div class="mask" v-show="isFilter" @click="hideMask"></div>
@@ -35,9 +39,15 @@
     methods: {
       filterBtn(){
         this.isFilter = true;
+        this._refreshFilter()
       },
       hideMask(){
         this.isFilter = false;
+      },
+      _refreshFilter(){
+        if (this.isFilter) {
+          this.$refs.filterWrapper.refresh();
+        }
       }
     },
     components: {
@@ -68,15 +78,17 @@
       height: @tabHeight/2;
       line-height: @tabHeight/2;
       .border-1px(@divisionLine);
-      .nav-item {
+      a {
+        display: block;
         flex: 1;
         text-align: center;
+        text-decoration: none;
         font-size: @mainFontSize;
+        color: @mainTextColor;
+        &.active {
+          color: @mainBackground;
+        }
       }
-    }
-    .help-content {
-      height: 100%;
-      overflow: hidden;
     }
     .filter-condition {
       padding: 0 20px;
@@ -85,7 +97,11 @@
       bottom: 0;
       right: 0;
       z-index: 1000;
-      background-color: @mainTextColor;
+      background-color: @tabBackground;
+      .filter-wrapper {
+        height: 100%;
+        overflow: hidden;
+      }
     }
     .slide-enter-active, .slide-leave-active {
       transition: all .3s;

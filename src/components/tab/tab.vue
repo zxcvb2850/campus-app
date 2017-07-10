@@ -1,23 +1,23 @@
 <template>
   <div class="tab">
     <div class="tab-item">
-      <router-link to="helpPage" tag="div">
-        <p><span class="iconfont icon-index"></span>帮助</p>
+      <router-link to="/helpPage" tag="div">
+        <p><span class="icon icon-index"></span>帮助</p>
       </router-link>
     </div>
     <div class="tab-item">
-      <router-link to="newsPage" tag="div">
-        <p><span class="iconfont icon-message1"></span>消息</p>
+      <router-link to="/newsPage" tag="div">
+        <p><span class="icon icon-message1"></span>消息</p>
       </router-link>
     </div>
     <div class="tab-item">
-      <router-link to="findPage" tag="div">
-        <p><span class="iconfont icon-find"></span>发现</p>
+      <router-link to="/findPage" tag="div">
+        <p><span class="icon icon-find"></span>发现</p>
       </router-link>
     </div>
     <div class="tab-item">
-      <router-link to="myPage" tag="div">
-        <p><span class="iconfont icon-my"></span>我的</p>
+      <router-link to="/myPage" tag="div">
+        <p><span class="icon icon-my"></span>我的</p>
       </router-link>
     </div>
   </div>
