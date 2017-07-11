@@ -17,12 +17,12 @@
       <ul>
         <li class="help-item">
           <div class="center">
-            <div class="user-icon"><img src="http://diy.qqjay.com/u2/2012/1216/e72b58f558f3c10d2f9aebea97a9add4.jpg"
-                                        alt=""></div>
+            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
             <div class="demand">
               <h3 class="title">取快递</h3>
-              <p class="address">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+              <p class="address">xxxxxxxxxxxxxxx</p>
               <p class="desc">简述：<span>无</span></p>
+              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
             </div>
             <div class="price"><span>3</span>￥</div>
           </div>
@@ -43,7 +43,8 @@
   export default {
     data(){
       return {
-        isFilter: false
+        isFilter: false,
+        isComplete: false
       }
     },
     methods: {
@@ -129,6 +130,7 @@
           flex: 0 0 100px;
           margin-right: 20px;
           width: 100px;
+          height: 100px;
           border-radius: 50%;
           overflow: hidden;
           img {
@@ -136,12 +138,12 @@
           }
         }
         .demand {
+          position: relative;
           flex: 1;
           display: flex;
           flex-direction: column;
           justify-content: center;
           line-height: 20px;
-          overflow: hidden;
           .title {
             font-size: @itemTitleFontSize;
             color: @importantColor;
@@ -153,13 +155,20 @@
           .desc {
             font-size: @mainFontSize;
           }
+          .complete {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            font-size: 80px;
+            color: @completeColor;
+          }
         }
         .price {
           flex: 20px 0 0;
           text-align: center;
           span {
             font-size: @headerHeight;
-            color: #f00;
+            color: @priceColor;
           }
         }
         .footer {

@@ -1,7 +1,55 @@
 <template>
   <div class="seek-list">
     <div class="filter-part">
-      <p  class="filter" @click="filterBtn">发布</p>
+      <p class="filter" v-show="isLogin">发布</p>
+    </div>
+    <div class="go-login" v-show="!isLogin">
+      <p class="desc">需要登录</p>
+      <h2 class="login-btn"><a href="javascript:void(0)">登录</a></h2>
+    </div>
+    <div class="seek-add" v-show="!seekList.length">
+      <div class="seek-add-wrapper">
+        <div class="seek-add-btn">+</div>
+        <p class="desc">你还没有发不过求助，快来发布吧</p>
+      </div>
+    </div>
+    <div class="seek-list-wrapper" v-show="seekList.length>0 && isLogin">
+      <scroll class="help-wrapper">
+        <ul>
+          <li class="help-item">
+            <div class="center">
+              <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
+              <div class="demand">
+                <h3 class="title">取快递</h3>
+                <p class="address">地址：<span>xxxxx</span></p>
+                <p class="desc">简述：<span>无</span></p>
+                <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
+              </div>
+              <div class="price"><span>3</span>￥</div>
+            </div>
+            <div class="footer">
+              <div class="sex"><span class="icon icon-girl"></span>网名</div>
+              <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
+            </div>
+          </li>
+          <li class="help-item">
+            <div class="center">
+              <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
+              <div class="demand">
+                <h3 class="title">取快递</h3>
+                <p class="address">地址：<span>xxxxx</span></p>
+                <p class="desc">简述：<span>无</span></p>
+                <p class="complete icon icon-iconcompleted" v-show="!isComplete"></p>
+              </div>
+              <div class="price"><span>3</span>￥</div>
+            </div>
+            <div class="footer">
+              <div class="sex"><span class="icon icon-boy"></span>网名</div>
+              <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
+            </div>
+          </li>
+        </ul>
+      </scroll>
     </div>
   </div>
 </template>
@@ -14,17 +62,13 @@
   export default {
     data(){
       return {
-        isFilter: false
+        seekList: [1, 2],
+        isComplete: true
       }
     },
-    created(){
-    },
-    methods: {
-      filterBtn(){
-        console.log(this.username)
-      },
+    computed: {
       ...mapGetters([
-        'username'
+        'isLogin'
       ])
     },
     components: {
@@ -57,24 +101,152 @@
         font-weight: normal;
         color: @headerColor;
       }
-      .filter-condition {
-        padding: 0 20px;
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        z-index: 1000;
-        background-color: @tabBackground;
-        .filter-wrapper {
-          height: 100%;
-          overflow: hidden;
+    }
+    .go-login {
+      margin: 30px auto;
+      width: 100%;
+      .desc {
+        margin-bottom: 30px;
+        text-align: center;
+        color: @mainTextColor;
+        font-size: @mainFontSize;
+      }
+      .login-btn {
+        text-align: center;
+        a {
+          display: block;
+          margin: 0 auto;
+          width: 80%;
+          height: @headerHeight;
+          line-height: @headerHeight;
+          -webkit-border-radius: 10px;
+          -moz-border-radius: 10px;
+          border-radius: 10px;
+          text-decoration: none;
+          color: @tabBackground;
+          background-color: @mainBackground;
         }
       }
-      .slide-enter-active, .slide-leave-active {
-        transition: all .3s;
+    }
+    .seek-add {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      .seek-add-wrapper {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        display: block;
+        transform: translate(-50%, -50%);
       }
-      .slide-enter, .slide-leave-to {
-        transform: translate3d(100%, 0, 0);
+      .seek-add-btn {
+        margin: 0 auto 10px;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        .bor-radius(50%);
+        font-size: 120px;
+        background-color: @filterBackground;
+        color: @tabBackground;
+      }
+      .desc {
+        text-align: center;
+        line-height: @mainLineHeight;
+        font-size: @mainFontSize;
+      }
+    }
+    .seek-list-wrapper {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      .help-wrapper {
+        height: 100%;
+        overflow: hidden;
+        .help-item {
+          padding: 10px;
+          .border-1px(@divisionLine);
+          &:last-child {
+            .border-none;
+          }
+          .center {
+            display: flex;
+            align-items: center;
+            .bor-sizing;
+            box-sizing: border-box
+          }
+          .user-icon {
+            flex: 0 0 100px;
+            margin-right: 20px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            img {
+              width: 100%;
+            }
+          }
+          .demand {
+            position: relative;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 20px;
+            .title {
+              font-size: @itemTitleFontSize;
+              color: @importantColor;
+            }
+            .address {
+              font-size: @titleFontSize;
+              .no-wrap();
+            }
+            .desc {
+              font-size: @mainFontSize;
+            }
+            .complete {
+              position: absolute;
+              top: 50%;
+              right: 0;
+              font-size: 80px;
+              color: @completeColor;
+            }
+          }
+          .price {
+            flex: 20px 0 0;
+            text-align: center;
+            span {
+              font-size: @headerHeight;
+              color: @priceColor;
+            }
+          }
+          .footer {
+            display: flex;
+            padding-top: 10px;
+            font-size: @mainFontSize;
+            .sex {
+              flex: 1;
+              text-align: left;
+              .icon{
+                padding-right: 10px;
+                &.icon-girl {
+                  color: #dc4883;
+                }
+                &.icon-boy {
+                  color: #487ef8;
+                }
+              }
+            }
+            .time {
+              flex: 1;
+              text-align: right;
+            }
+          }
+        }
       }
     }
   }
