@@ -4,7 +4,8 @@
 const state = {
   username: "admin",
   password: "123456",
-  isLogin: false
+  isLogin: false,
+  loginPage: false
 }
 
 export default state;

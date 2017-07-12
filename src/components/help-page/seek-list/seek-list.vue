@@ -3,11 +3,8 @@
     <div class="filter-part">
       <p class="filter" v-show="isLogin">发布</p>
     </div>
-    <div class="go-login" v-show="!isLogin">
-      <p class="desc">需要登录</p>
-      <h2 class="login-btn"><a href="javascript:void(0)">登录</a></h2>
-    </div>
-    <div class="seek-add" v-show="!seekList.length">
+    <login v-show="!isLogin"></login>
+    <div class="seek-add" v-show="!seekList.length && isLogin">
       <div class="seek-add-wrapper">
         <div class="seek-add-btn">+</div>
         <p class="desc">你还没有发不过求助，快来发布吧</p>
@@ -57,12 +54,13 @@
 <script>
   import Scroll from "base/scroll/scroll"
   import VMask from "base/mask/mask"
+  import Login from "base/login/login"
   import {mapGetters} from 'vuex'
 
   export default {
     data(){
       return {
-        seekList: [1, 2],
+        seekList: [],
         isComplete: true
       }
     },
@@ -73,7 +71,8 @@
     },
     components: {
       Scroll,
-      VMask
+      VMask,
+      Login
     }
   }
 </script>

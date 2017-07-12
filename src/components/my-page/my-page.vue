@@ -1,22 +1,32 @@
 <template>
   <div class="my-page">
-    <div class="go-login" v-show="!isLogin">
-      <div class="login-wrapper">
-        <h2 class="login-btn"><a href="javascript:void(0)">登录</a></h2>
-        <h2 class="login-btn"><a href="javascript:void(0)">注册</a></h2>
-      </div>
-    </div>
+    <login v-show="!isLogin" @clickLogin="clickLogin"></login>
+    <login-page></login-page>
   </div>
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  import Login from 'base/login/login'
+  import LoginPage from 'base/login-page/login-page'
+  import {mapGetters, mapMutations} from 'vuex'
 
   export default {
     computed: {
       ...mapGetters([
         'isLogin'
       ])
+    },
+    methods: {
+      clickLogin(){
+        this.setLoginPage(true)
+      },
+      ...mapMutations({
+        setLoginPage: "SET_LOGINPAGE"
+      })
+    },
+    components: {
+      Login,
+      LoginPage
     }
   }
 </script>
