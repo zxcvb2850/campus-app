@@ -6,6 +6,8 @@
 @maskBackground: rgba(0, 0, 0, .5);
 @headerColor: #fff;
 @divisionLine: rgba(0, 0, 0, .1);
+@completeColor: rgba(255, 0, 0, .6);
+@priceColor: rgba(255, 0, 0, 1);
 
 @tabHeight: 50px;
 @headerHeight: 40px;
@@ -14,6 +16,8 @@
 @itemTitleFontSize: 16px;
 @titleFontSize: 14px;
 @mainFontSize: 12px;
+
+@mainLineHeight: 16px;
 
 body, html {
   line-height: 1;
@@ -69,4 +73,10 @@ body, html {
     clear: both;
     visibility: hidden;
   }
+}
+
+.bor-radius(@radius) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
 }
