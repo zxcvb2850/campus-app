@@ -1,7 +1,12 @@
 <template>
   <div class="seek-list">
     <div class="filter-part">
-      <p  class="filter" @click="filterBtn">发布</p>
+      <p class="filter" v-show="isLogin">发布</p>
+    </div>
+    <div class="login">
+      <div>
+        <h2><a class="login-btn" href="javascript:void(0)" @click="goingLogin">现在去登陆</a></h2>
+      </div>
     </div>
   </div>
 </template>
@@ -9,7 +14,7 @@
 <script>
   import Scroll from "base/scroll/scroll"
   import VMask from "base/mask/mask"
-  import {mapGetters} from "vuex"
+  import {mapGetters} from 'vuex'
 
   export default {
     data(){
@@ -17,14 +22,17 @@
         isFilter: false
       }
     },
-    created(){
-    },
     methods: {
       filterBtn(){
         console.log(this.username)
       },
+      goingLogin(){
+        console.log(1)
+      }
+    },
+    computed: {
       ...mapGetters([
-        'username'
+        'isLogin'
       ])
     },
     components: {
@@ -57,24 +65,16 @@
         font-weight: normal;
         color: @headerColor;
       }
-      .filter-condition {
-        padding: 0 20px;
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        z-index: 1000;
-        background-color: @tabBackground;
-        .filter-wrapper {
-          height: 100%;
-          overflow: hidden;
+    }
+    .login {
+      h2 {
+        text-align: center;
+        .login-btn {
+          padding: 4px 10px;
+          text-decoration: none;
+          color: @tabBackground;
+          background-color: @mainBackground;
         }
-      }
-      .slide-enter-active, .slide-leave-active {
-        transition: all .3s;
-      }
-      .slide-enter, .slide-leave-to {
-        transform: translate3d(100%, 0, 0);
       }
     }
   }

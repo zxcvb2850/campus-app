@@ -129,6 +129,7 @@
           flex: 0 0 100px;
           margin-right: 20px;
           width: 100px;
+          height: 100px;
           border-radius: 50%;
           overflow: hidden;
           img {
