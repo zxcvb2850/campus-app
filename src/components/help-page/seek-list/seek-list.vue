@@ -61,7 +61,7 @@
   export default {
     data(){
       return {
-        seekList: [],
+        seekList: [1],
         isComplete: true
       }
     },
@@ -71,7 +71,6 @@
       },
       release(){
         this.$router.push("seekList/release")
-        console.log(1)
       },
       ...mapMutations({
         setLoginPage: "SET_LOGINPAGE"
@@ -172,6 +171,7 @@
       .help-item {
         padding: 10px;
         .border-1px(@divisionLine);
+        .box-sizing;
         &:last-child {
           .border-none;
         }
@@ -219,7 +219,7 @@
           }
         }
         .price {
-          flex: 20px 0 0;
+          flex: 50px 0 0;
           text-align: center;
           span {
             font-size: @headerHeight;

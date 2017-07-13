@@ -47,6 +47,118 @@
             <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
           </div>
         </li>
+        <li class="help-item">
+          <div class="center">
+            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
+            <div class="demand">
+              <h3 class="title">取快递</h3>
+              <p class="address">xxxxxxxxxxxxxxx</p>
+              <p class="desc">简述：<span>无</span></p>
+              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
+            </div>
+            <div class="price"><span>3</span>￥</div>
+          </div>
+          <div class="footer">
+            <div class="sex"><span class="icon icon-boy"></span>网名</div>
+            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
+          </div>
+        </li>
+        <li class="help-item">
+          <div class="center">
+            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
+            <div class="demand">
+              <h3 class="title">取快递</h3>
+              <p class="address">xxxxxxxxxxxxxxx</p>
+              <p class="desc">简述：<span>无</span></p>
+              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
+            </div>
+            <div class="price"><span>3</span>￥</div>
+          </div>
+          <div class="footer">
+            <div class="sex"><span class="icon icon-boy"></span>网名</div>
+            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
+          </div>
+        </li>
+        <li class="help-item">
+          <div class="center">
+            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
+            <div class="demand">
+              <h3 class="title">取快递</h3>
+              <p class="address">xxxxxxxxxxxxxxx</p>
+              <p class="desc">简述：<span>无</span></p>
+              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
+            </div>
+            <div class="price"><span>3</span>￥</div>
+          </div>
+          <div class="footer">
+            <div class="sex"><span class="icon icon-boy"></span>网名</div>
+            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
+          </div>
+        </li>
+        <li class="help-item">
+          <div class="center">
+            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
+            <div class="demand">
+              <h3 class="title">取快递</h3>
+              <p class="address">xxxxxxxxxxxxxxx</p>
+              <p class="desc">简述：<span>无</span></p>
+              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
+            </div>
+            <div class="price"><span>3</span>￥</div>
+          </div>
+          <div class="footer">
+            <div class="sex"><span class="icon icon-boy"></span>网名</div>
+            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
+          </div>
+        </li>
+        <li class="help-item">
+          <div class="center">
+            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
+            <div class="demand">
+              <h3 class="title">取快递</h3>
+              <p class="address">xxxxxxxxxxxxxxx</p>
+              <p class="desc">简述：<span>无</span></p>
+              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
+            </div>
+            <div class="price"><span>3</span>￥</div>
+          </div>
+          <div class="footer">
+            <div class="sex"><span class="icon icon-boy"></span>网名</div>
+            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
+          </div>
+        </li>
+        <li class="help-item">
+          <div class="center">
+            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
+            <div class="demand">
+              <h3 class="title">取快递</h3>
+              <p class="address">xxxxxxxxxxxxxxx</p>
+              <p class="desc">简述：<span>无</span></p>
+              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
+            </div>
+            <div class="price"><span>3</span>￥</div>
+          </div>
+          <div class="footer">
+            <div class="sex"><span class="icon icon-boy"></span>网名</div>
+            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
+          </div>
+        </li>
+        <li class="help-item">
+          <div class="center">
+            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
+            <div class="demand">
+              <h3 class="title">取快递</h3>
+              <p class="address">xxxxxxxxxxxxxxx</p>
+              <p class="desc">简述：<span>无</span></p>
+              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
+            </div>
+            <div class="price"><span>3</span>￥</div>
+          </div>
+          <div class="footer">
+            <div class="sex"><span class="icon icon-boy"></span>网名</div>
+            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
+          </div>
+        </li>
       </ul>
     </scroll>
   </div>
@@ -128,6 +240,7 @@
       .help-item {
         padding: 10px;
         .border-1px(@divisionLine);
+        .box-sizing;
         &:last-child {
           .border-none;
         }
@@ -175,7 +288,7 @@
           }
         }
         .price {
-          flex: 20px 0 0;
+          flex: 50px 0 0;
           text-align: center;
           span {
             font-size: @headerHeight;

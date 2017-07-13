@@ -4,58 +4,79 @@
     <div class="release-type">
       <p class="select-type">选择类型</p>
       <ul class="item-wrapper">
-        <li class="re-item" v-for="(item,index) in releases" @click="select(item,index)">{{item.text}}</li>
+        <li class="re-item" :class="{'active':index === cur}" v-for="(item,index) in releases"
+            @click="select(item,index)">{{item.text}}
+        </li>
       </ul>
     </div>
     <div class="footer">
-      <a href="javascript:void(0)">下一步</a>
+      <a href="javascript:void(0)" @click="releaseBack">取消</a>
+      <a href="javascript:void(0)" :class="{'next':!isNext}" @click="formFilling">下一步</a>
     </div>
+    <rel-type :relType="postId"></rel-type>
   </div>
 </template>
 
 <script>
   import VHeader from "base/header/header"
+  import relType from "base/reltype/reltype"
 
   export default {
     data(){
       return {
         releases: [
           {
-            "id": "1",
+            "id": 1,
             "text": "食堂餐"
           },
           {
-            "id": "2",
+            "id": 2,
             "text": "取快递"
           },
           {
-            "id": "3",
+            "id": 3,
             "text": "帮购物"
           },
           {
-            "id": "4",
+            "id": 4,
             "text": "周边小吃"
           },
           {
-            "id": "5",
+            "id": 5,
             "text": "帮摄影"
           },
           {
-            "id": "6",
+            "id": 6,
             "text": "其他"
           },
-        ]
+        ],
+        cur: null,
+        itemId: null,
+        postId: 0,
+        isNext: false
       }
     },
     methods: {
-      select(item,index){
-        console.log(item.id)
-        console.log(index)
+      releaseBack(){
+        this.$router.back();
+      },
+      select(item, index){
+        this.cur = index;
+        this.itemId = item.id;
+        this.isNext = true;
+      },
+      formFilling(){
+        if (!this.isNext) {
+          this.postId = 0;
+        } else {
+          this.postId = this.itemId;
+        }
       }
     },
     components: {
-      VHeader
-    }
+      VHeader,
+      relType
+    },
   }
 </script>
 
@@ -95,9 +116,14 @@
         .box-sizing;
         width: 30%;
         font-size: 14px;
+        &.active {
+          color: @tabBackground;
+          background-color: @filterBackground;
+        }
       }
     }
     .footer {
+      display: flex;
       position: absolute;
       left: 0;
       right: 0;
@@ -105,13 +131,24 @@
       height: @tabHeight;
       line-height: @tabHeight;
       a {
-        display: block;
+        flex: 1;
         font-size: 20px;
         font-weight: bold;
         text-align: center;
         text-decoration: none;
         background-color: @mainBackground;
         color: @headerColor;
+        .box-sizing;
+        &.next {
+          background-color: transparent;
+          color: #000;
+        }
+        &:first-child {
+          border-right: 1px solid @mainTextColor;
+        }
+        &:last-child {
+          border-left: 1px solid @mainTextColor;
+        }
       }
     }
   }
