@@ -1,53 +1,53 @@
 <template>
   <div class="seek-list">
     <div class="filter-part">
-      <p class="filter" v-show="isLogin">发布</p>
+      <p class="filter" v-show="isLogin" @click="release">发布</p>
     </div>
-    <login v-show="!isLogin"></login>
+    <login v-show="!isLogin" @clickLogin="clickLogin"></login>
+    <login-page></login-page>
+    <router-view></router-view>
     <div class="seek-add" v-show="!seekList.length && isLogin">
       <div class="seek-add-wrapper">
-        <div class="seek-add-btn">+</div>
+        <div class="seek-add-btn" @click="release">+</div>
         <p class="desc">你还没有发不过求助，快来发布吧</p>
       </div>
     </div>
-    <div class="seek-list-wrapper" v-show="seekList.length>0 && isLogin">
-      <scroll class="help-wrapper">
-        <ul>
-          <li class="help-item">
-            <div class="center">
-              <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
-              <div class="demand">
-                <h3 class="title">取快递</h3>
-                <p class="address">地址：<span>xxxxx</span></p>
-                <p class="desc">简述：<span>无</span></p>
-                <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
-              </div>
-              <div class="price"><span>3</span>￥</div>
+    <scroll class="help-wrapper" v-show="seekList.length>0 && isLogin">
+      <ul>
+        <li class="help-item">
+          <div class="center">
+            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
+            <div class="demand">
+              <h3 class="title">取快递</h3>
+              <p class="address">地址：<span>xxxxx</span></p>
+              <p class="desc">简述：<span>无</span></p>
+              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
             </div>
-            <div class="footer">
-              <div class="sex"><span class="icon icon-girl"></span>网名</div>
-              <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
+            <div class="price"><span>3</span>￥</div>
+          </div>
+          <div class="footer">
+            <div class="sex"><span class="icon icon-girl"></span>网名</div>
+            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
+          </div>
+        </li>
+        <li class="help-item">
+          <div class="center">
+            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
+            <div class="demand">
+              <h3 class="title">取快递</h3>
+              <p class="address">地址：<span>xxxxx</span></p>
+              <p class="desc">简述：<span>无</span></p>
+              <p class="complete icon icon-iconcompleted" v-show="!isComplete"></p>
             </div>
-          </li>
-          <li class="help-item">
-            <div class="center">
-              <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
-              <div class="demand">
-                <h3 class="title">取快递</h3>
-                <p class="address">地址：<span>xxxxx</span></p>
-                <p class="desc">简述：<span>无</span></p>
-                <p class="complete icon icon-iconcompleted" v-show="!isComplete"></p>
-              </div>
-              <div class="price"><span>3</span>￥</div>
-            </div>
-            <div class="footer">
-              <div class="sex"><span class="icon icon-boy"></span>网名</div>
-              <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
-            </div>
-          </li>
-        </ul>
-      </scroll>
-    </div>
+            <div class="price"><span>3</span>￥</div>
+          </div>
+          <div class="footer">
+            <div class="sex"><span class="icon icon-boy"></span>网名</div>
+            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
+          </div>
+        </li>
+      </ul>
+    </scroll>
   </div>
 </template>
 
@@ -55,7 +55,8 @@
   import Scroll from "base/scroll/scroll"
   import VMask from "base/mask/mask"
   import Login from "base/login/login"
-  import {mapGetters} from 'vuex'
+  import loginPage from "components/login-page/login-page"
+  import {mapGetters, mapMutations} from 'vuex'
 
   export default {
     data(){
@@ -63,6 +64,18 @@
         seekList: [],
         isComplete: true
       }
+    },
+    methods: {
+      clickLogin(){
+        this.setLoginPage(true)
+      },
+      release(){
+        this.$router.push("seekList/release")
+        console.log(1)
+      },
+      ...mapMutations({
+        setLoginPage: "SET_LOGINPAGE"
+      })
     },
     computed: {
       ...mapGetters([
@@ -72,7 +85,8 @@
     components: {
       Scroll,
       VMask,
-      Login
+      Login,
+      loginPage
     }
   }
 </script>
@@ -81,11 +95,6 @@
   @import "~common/style/index";
 
   .seek-list {
-    position: absolute;
-    top: @tabHeight/2;
-    bottom: 0;
-    left: 0;
-    right: 0;
     .filter-part {
       position: relative;
       top: 0;
@@ -94,7 +103,6 @@
       .filter {
         position: absolute;
         top: -50px;
-        bottom: 0;
         right: 0;
         font-size: @titleFontSize;
         font-weight: normal;
@@ -133,6 +141,7 @@
       bottom: 0;
       left: 0;
       right: 0;
+      z-index: 1;
       .seek-add-wrapper {
         position: absolute;
         top: 40%;
@@ -157,93 +166,86 @@
         font-size: @mainFontSize;
       }
     }
-    .seek-list-wrapper {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      .help-wrapper {
-        height: 100%;
-        overflow: hidden;
-        .help-item {
-          padding: 10px;
-          .border-1px(@divisionLine);
-          &:last-child {
-            .border-none;
+    .help-wrapper {
+      height: 100%;
+      overflow: hidden;
+      .help-item {
+        padding: 10px;
+        .border-1px(@divisionLine);
+        &:last-child {
+          .border-none;
+        }
+        .center {
+          display: flex;
+          align-items: center;
+          .box-sizing;
+          box-sizing: border-box
+        }
+        .user-icon {
+          flex: 0 0 100px;
+          margin-right: 20px;
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          overflow: hidden;
+          img {
+            width: 100%;
           }
-          .center {
-            display: flex;
-            align-items: center;
-            .bor-sizing;
-            box-sizing: border-box
+        }
+        .demand {
+          position: relative;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          line-height: 20px;
+          .title {
+            font-size: @itemTitleFontSize;
+            color: @importantColor;
           }
-          .user-icon {
-            flex: 0 0 100px;
-            margin-right: 20px;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            overflow: hidden;
-            img {
-              width: 100%;
-            }
+          .address {
+            font-size: @titleFontSize;
+            .no-wrap();
           }
-          .demand {
-            position: relative;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            line-height: 20px;
-            .title {
-              font-size: @itemTitleFontSize;
-              color: @importantColor;
-            }
-            .address {
-              font-size: @titleFontSize;
-              .no-wrap();
-            }
-            .desc {
-              font-size: @mainFontSize;
-            }
-            .complete {
-              position: absolute;
-              top: 50%;
-              right: 0;
-              font-size: 80px;
-              color: @completeColor;
-            }
-          }
-          .price {
-            flex: 20px 0 0;
-            text-align: center;
-            span {
-              font-size: @headerHeight;
-              color: @priceColor;
-            }
-          }
-          .footer {
-            display: flex;
-            padding-top: 10px;
+          .desc {
             font-size: @mainFontSize;
-            .sex {
-              flex: 1;
-              text-align: left;
-              .icon{
-                padding-right: 10px;
-                &.icon-girl {
-                  color: #dc4883;
-                }
-                &.icon-boy {
-                  color: #487ef8;
-                }
+          }
+          .complete {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            font-size: 80px;
+            color: @completeColor;
+          }
+        }
+        .price {
+          flex: 20px 0 0;
+          text-align: center;
+          span {
+            font-size: @headerHeight;
+            color: @priceColor;
+          }
+        }
+        .footer {
+          display: flex;
+          padding-top: 10px;
+          font-size: @mainFontSize;
+          .sex {
+            flex: 1;
+            text-align: left;
+            .icon {
+              padding-right: 10px;
+              &.icon-girl {
+                color: #dc4883;
+              }
+              &.icon-boy {
+                color: #487ef8;
               }
             }
-            .time {
-              flex: 1;
-              text-align: right;
-            }
+          }
+          .time {
+            flex: 1;
+            text-align: right;
           }
         }
       }

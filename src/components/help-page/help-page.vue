@@ -1,28 +1,26 @@
 <template>
   <div class="help-wrapper">
-    <m-header>
+    <v-header>
       <p>我的学校<span></span></p>
-    </m-header>
+    </v-header>
     <div class="nav">
       <router-link to="/helpPage/helpList" class="nav-item">帮助</router-link>
       <router-link to="/helpPage/seekList" class="nav-item">求助</router-link>
     </div>
-    <div>
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
-    </div>
+    <keep-alive>
+      <router-view class="wrapper"></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
   import Scroll from "base/scroll/scroll"
-  import MHeader from "components/header/header"
+  import VHeader from "base/header/header"
 
   export default {
     components: {
       Scroll,
-      MHeader
+      VHeader
     }
   }
 </script>
@@ -32,7 +30,7 @@
 
   .help-wrapper {
     position: fixed;
-    top: @headerHeight;
+    top: 0;
     bottom: @tabHeight;
     left: 0;
     right: 0;
@@ -52,6 +50,13 @@
           color: @mainBackground;
         }
       }
+    }
+    .wrapper {
+      position: absolute;
+      top: @tabHeight+@headerHeight/2-5px;
+      bottom: 0;
+      left: 0;
+      right: 0;
     }
   }
 </style>

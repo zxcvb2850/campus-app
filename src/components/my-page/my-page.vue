@@ -7,7 +7,7 @@
 
 <script>
   import Login from 'base/login/login'
-  import LoginPage from 'base/login-page/login-page'
+  import LoginPage from 'components/login-page/login-page'
   import {mapGetters, mapMutations} from 'vuex'
 
   export default {

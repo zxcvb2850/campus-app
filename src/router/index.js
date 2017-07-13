@@ -6,6 +6,7 @@ import findPage from 'components/find-page/find-page'
 import myPage from 'components/my-page/my-page'
 import helpList from 'components/help-page/help-list/help-list'
 import seekList from 'components/help-page/seek-list/seek-list'
+import release from 'components/help-page/seek-list/release/release'
 
 Vue.use(Router)
 
@@ -32,7 +33,13 @@ export default new Router({
         {
           path: 'seekList',
           name: 'seekList',
-          component: seekList
+          component: seekList,
+          children: [
+            {
+              path: 'release',
+              component: release
+            }
+          ]
         }
       ]
     },
