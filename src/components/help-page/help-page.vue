@@ -39,7 +39,7 @@
       height: @tabHeight/2;
       line-height: @tabHeight/2;
       .border-1px(@divisionLine);
-      a {
+      .nav-item {
         display: block;
         flex: 1;
         text-align: center;
