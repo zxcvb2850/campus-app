@@ -13,13 +13,14 @@
       <a href="javascript:void(0)" @click="releaseBack">取消</a>
       <a href="javascript:void(0)" :class="{'next':!isNext}" @click="formFilling">下一步</a>
     </div>
-    <rel-type :relType="postId"></rel-type>
+    <rel-type :relType="postId" v-show="postId>0" @relBack="relBack"></rel-type>
   </div>
 </template>
 
 <script>
   import VHeader from "base/header/header"
   import relType from "base/reltype/reltype"
+  import {mapGetters} from "vuex"
 
   export default {
     data(){
@@ -56,7 +57,16 @@
         isNext: false
       }
     },
+    created(){
+      this._showRel();
+    },
     methods: {
+      _showRel(){
+        if (this.isLogin) {
+          return;
+        }
+        this.$router.back();
+      },
       releaseBack(){
         this.$router.back();
       },
@@ -71,7 +81,15 @@
         } else {
           this.postId = this.itemId;
         }
+      },
+      relBack(){
+        this.postId = 0;
       }
+    },
+    computed: {
+      ...mapGetters([
+        "isLogin"
+      ])
     },
     components: {
       VHeader,
@@ -132,7 +150,7 @@
       line-height: @tabHeight;
       a {
         flex: 1;
-        font-size: 20px;
+        font-size: @maxFontSize;
         font-weight: bold;
         text-align: center;
         text-decoration: none;

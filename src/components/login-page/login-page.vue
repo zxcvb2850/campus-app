@@ -128,15 +128,18 @@
           }
         }
       }
-      a.remember {
-        font-size: 13px
-      }
-      a.forgot {
-        font-size: 13px;
-        float: right;
-        margin-top: 2px;
-        width: auto;
-        cursor: pointer
+      a {
+        color: @tabBackground;
+        &.remember {
+          font-size: 13px
+        }
+        &.forgot {
+          font-size: 13px;
+          float: right;
+          margin-top: 2px;
+          width: auto;
+          cursor: pointer
+        }
       }
       .logo {
         margin: 0 auto 20px;
