@@ -57,10 +57,11 @@ body, html {
 }
 
 /*不换行*/
-.no-wrap() {
-  text-overflow: ellipsis;
-  overflow: hidden;
+.no-wrap {
+  display: block;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /*清除浮动*/

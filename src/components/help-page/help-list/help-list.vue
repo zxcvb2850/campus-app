@@ -20,7 +20,7 @@
             <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
             <div class="demand">
               <h3 class="title">取快递</h3>
-              <p class="address">xxxxxxxxxxxxxxx</p>
+              <p class="address">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
               <p class="desc">简述：<span>无</span></p>
               <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
             </div>
@@ -268,13 +268,14 @@
           flex-direction: column;
           justify-content: center;
           line-height: 20px;
+          min-width: 1px;
           .title {
             font-size: @itemTitleFontSize;
             color: @importantColor;
           }
           .address {
             font-size: @titleFontSize;
-            .no-wrap();
+            .no-wrap;
           }
           .desc {
             font-size: @mainFontSize;

@@ -2,12 +2,43 @@
   <div class="news-page">
     <v-header>消息</v-header>
     <div class="nav">
-      <a href="javascript:void(0)" class="nav-item">附近</a>
-      <a href="javascript:void(0)" class="nav-item">消息</a>
+      <a href="javascript:void(0)" class="nav-item" @click="currentClick(0)"
+         :class="{'active':currentIndex === 0}">附近</a>
+      <a href="javascript:void(0)" class="nav-item" @click="currentClick(1)"
+         :class="{'active':currentIndex === 1}">消息</a>
     </div>
-    <div class="content">
-      <div class="content-wrapper">
-        111
+    <div class="content" ref="contentWrapper">
+      <div class="wrapper" ref="wrapper">
+        <div class="item">1</div>
+        <div class="item">
+          <scroll class="item-wrapper">
+            <ul>
+              <li class="record-item">
+                <div class="icon"><img src="../../assets/logo.png" alt=""></div>
+                <div class="info">
+                  <h3 class="alias">xxxx</h3>
+                  <p class="last-record">xxxxx</p>
+                </div>
+                <div class="num-time">
+                  <p class="num">2</p>
+                  <p class="time">MM:ss</p>
+                </div>
+              </li>
+              <li class="record-item">
+                <div class="icon"><img src="../../assets/logo.png" alt=""></div>
+                <div class="info">
+                  <h3 class="alias">xxxx</h3>
+                  <p class="last-record">
+                    我啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦</p>
+                </div>
+                <div class="num-time">
+                  <p class="num">2</p>
+                  <p class="time">MM:ss</p>
+                </div>
+              </li>
+            </ul>
+          </scroll>
+        </div>
       </div>
     </div>
   </div>
@@ -15,10 +46,75 @@
 
 <script>
   import VHeader from "base/header/header"
+  import BScroll from "better-scroll"
+  import Scroll from "base/scroll/scroll"
 
   export default {
+    data(){
+      return {
+        currentIndex: 0
+      }
+    },
+    mounted(){
+      this.$nextTick(() => {
+        this._initSliderWidth();
+        this._initSlider();
+      })
+
+      window.addEventListener('resize', () => {
+        if (!this.contentWrapper) {
+          return;
+        }
+        this._initSliderWidth(true);
+        this.contentWrapper.refresh();
+      })
+    },
+    methods: {
+      _initSliderWidth(isResize){
+        this.children = this.$refs.wrapper.children;
+
+        let width = 0;
+        let contentWidth = this.$refs.contentWrapper.clientWidth;
+        for (let i = 0; i < this.children.length; i++) {
+          let child = this.children[i];
+          child.style.width = contentWidth + 'px';
+          width += contentWidth;
+        }
+
+        if (!isResize) {
+          width += contentWidth;
+        }
+        this.$refs.wrapper.style.width = width + 'px';
+
+      },
+      _initSlider(){
+        this.contentWrapper = new BScroll(this.$refs.contentWrapper, {
+          scrollX: true,
+          scrollY: false,
+          momentum: false,
+          snap: true,
+          snapLoop: false,
+          bounce: false,
+          click: true
+        })
+
+        this.contentWrapper.on('scrollEnd', () => {
+          let pageIndex = this.contentWrapper.getCurrentPage().pageX;
+          this.currentIndex = pageIndex;
+        })
+      },
+      currentClick(index){
+        if (this.currentIndex === index) {
+          return;
+        }
+        this.currentIndex = index;
+        let contentWidth = this.$refs.contentWrapper.clientWidth;
+        this.contentWrapper.scrollTo(-(this.currentIndex * contentWidth), 0);
+      }
+    },
     components: {
-      VHeader
+      VHeader,
+      Scroll
     }
   }
 </script>
@@ -50,6 +146,74 @@
       bottom: @headerHeight;
       left: 0;
       right: 0;
+      overflow: hidden;
+      .wrapper {
+        position: relative;
+        top:0;
+        bottom:0;
+        .item {
+          position: relative;
+          float: left;
+        }
+        .item-wrapper {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
+      }
+      .record-item {
+        display: flex;
+        padding: 10px;
+        height: 40px;
+        .border-1px(@divisionLine);
+        .icon {
+          margin: 0 6px;
+          flex: 0 0 40px;
+          height: 40px;
+          border-radius: 50%;
+          overflow: hidden;
+          img {
+            width: 100%;
+          }
+        }
+        .info {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          min-width: 1px;
+          .alias {
+            font-size: @titleFontSize;
+          }
+          .last-record {
+            .no-wrap;
+          }
+        }
+        .num-time {
+          flex: 60px 0 0;
+          .num {
+            display: block;
+            position: absolute;
+            bottom: 50%;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 50%;
+            background-color: @priceColor;
+            color: @tabBackground;
+          }
+          .time {
+            position: absolute;
+            bottom: 6px;
+            right: 10px;
+          }
+        }
+      }
     }
   }
 </style>
