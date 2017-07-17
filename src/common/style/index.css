@@ -18,6 +18,12 @@ html {
   box-sizing: border-box;
 }
 /*不换行*/
+.no-wrap {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 /*清除浮动*/
 .clearfix {
   display: inline-block;

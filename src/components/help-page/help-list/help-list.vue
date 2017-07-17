@@ -15,148 +15,20 @@
     <v-mask @clickMask="hideMask" :isFilter="isFilter"></v-mask>
     <scroll class="help-wrapper">
       <ul>
-        <li class="help-item">
+        <li class="help-item" @click="helpDetails(help.id)" v-for="(help,index) in helps">
           <div class="center">
-            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
+            <div class="user-icon"><img :src="help.userIcon" alt=""></div>
             <div class="demand">
-              <h3 class="title">取快递</h3>
-              <p class="address">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
-              <p class="desc">简述：<span>无</span></p>
-              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
+              <h3 class="title">{{help.type}}(1为快递，要转)</h3>
+              <p class="address">{{help.address}}</p>
+              <p class="desc">简述：<span>{{help.desc}}</span></p>
+              <p class="complete icon icon-iconcompleted" v-show="help.complete"></p>
             </div>
-            <div class="price"><span>3</span>￥</div>
+            <div class="price"><span>{{help.price}}</span>￥</div>
           </div>
           <div class="footer">
-            <div class="sex"><span class="icon icon-girl"></span>网名</div>
-            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
-          </div>
-        </li>
-        <li class="help-item">
-          <div class="center">
-            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
-            <div class="demand">
-              <h3 class="title">取快递</h3>
-              <p class="address">xxxxxxxxxxxxxxx</p>
-              <p class="desc">简述：<span>无</span></p>
-              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
-            </div>
-            <div class="price"><span>3</span>￥</div>
-          </div>
-          <div class="footer">
-            <div class="sex"><span class="icon icon-boy"></span>网名</div>
-            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
-          </div>
-        </li>
-        <li class="help-item">
-          <div class="center">
-            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
-            <div class="demand">
-              <h3 class="title">取快递</h3>
-              <p class="address">xxxxxxxxxxxxxxx</p>
-              <p class="desc">简述：<span>无</span></p>
-              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
-            </div>
-            <div class="price"><span>3</span>￥</div>
-          </div>
-          <div class="footer">
-            <div class="sex"><span class="icon icon-boy"></span>网名</div>
-            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
-          </div>
-        </li>
-        <li class="help-item">
-          <div class="center">
-            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
-            <div class="demand">
-              <h3 class="title">取快递</h3>
-              <p class="address">xxxxxxxxxxxxxxx</p>
-              <p class="desc">简述：<span>无</span></p>
-              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
-            </div>
-            <div class="price"><span>3</span>￥</div>
-          </div>
-          <div class="footer">
-            <div class="sex"><span class="icon icon-boy"></span>网名</div>
-            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
-          </div>
-        </li>
-        <li class="help-item">
-          <div class="center">
-            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
-            <div class="demand">
-              <h3 class="title">取快递</h3>
-              <p class="address">xxxxxxxxxxxxxxx</p>
-              <p class="desc">简述：<span>无</span></p>
-              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
-            </div>
-            <div class="price"><span>3</span>￥</div>
-          </div>
-          <div class="footer">
-            <div class="sex"><span class="icon icon-boy"></span>网名</div>
-            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
-          </div>
-        </li>
-        <li class="help-item">
-          <div class="center">
-            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
-            <div class="demand">
-              <h3 class="title">取快递</h3>
-              <p class="address">xxxxxxxxxxxxxxx</p>
-              <p class="desc">简述：<span>无</span></p>
-              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
-            </div>
-            <div class="price"><span>3</span>￥</div>
-          </div>
-          <div class="footer">
-            <div class="sex"><span class="icon icon-boy"></span>网名</div>
-            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
-          </div>
-        </li>
-        <li class="help-item">
-          <div class="center">
-            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
-            <div class="demand">
-              <h3 class="title">取快递</h3>
-              <p class="address">xxxxxxxxxxxxxxx</p>
-              <p class="desc">简述：<span>无</span></p>
-              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
-            </div>
-            <div class="price"><span>3</span>￥</div>
-          </div>
-          <div class="footer">
-            <div class="sex"><span class="icon icon-boy"></span>网名</div>
-            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
-          </div>
-        </li>
-        <li class="help-item">
-          <div class="center">
-            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
-            <div class="demand">
-              <h3 class="title">取快递</h3>
-              <p class="address">xxxxxxxxxxxxxxx</p>
-              <p class="desc">简述：<span>无</span></p>
-              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
-            </div>
-            <div class="price"><span>3</span>￥</div>
-          </div>
-          <div class="footer">
-            <div class="sex"><span class="icon icon-boy"></span>网名</div>
-            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
-          </div>
-        </li>
-        <li class="help-item">
-          <div class="center">
-            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
-            <div class="demand">
-              <h3 class="title">取快递</h3>
-              <p class="address">xxxxxxxxxxxxxxx</p>
-              <p class="desc">简述：<span>无</span></p>
-              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
-            </div>
-            <div class="price"><span>3</span>￥</div>
-          </div>
-          <div class="footer">
-            <div class="sex"><span class="icon icon-boy"></span>网名</div>
-            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
+            <div class="sex"><span class="icon" :class="help.sex === 1?'icon-boy':'icon-girl'"></span><span>{{help.username}}</span></div>
+            <div class="time">发布时间:<span>{{help.releaseTime}}</span></div>
           </div>
         </li>
       </ul>
@@ -172,7 +44,32 @@
     data(){
       return {
         isFilter: false,
-        isComplete: false
+        helps: [
+          {
+            id: 1,                     //唯一标示
+            userIcon: "http://imgsrc.baidu.com/forum/w%3D580%3B/sign=a1263be45b0fd9f9a01755611516d62a/30adcbef76094b36e6710f75a9cc7cd98c109d42.jpg",
+            type:1,                    //单子类型1为快递
+            address: "xxxxxxxxxx",     //地址
+            desc: "无",                //简述
+            complete: true,           //次单子是否已完成
+            price: 3,
+            sex: 2,                   //性别1为男，2为女
+            username: "网名",         //发布者的网名
+            releaseTime: "7月7日"     //发布时间
+          },
+          {
+            id: 2,                     //唯一标示
+            userIcon: "http://imgsrc.baidu.com/forum/w%3D580%3B/sign=a1263be45b0fd9f9a01755611516d62a/30adcbef76094b36e6710f75a9cc7cd98c109d42.jpg",
+            type:1,                    //单子类型1为快递
+            address: "xxxxxxxxxx",     //地址
+            desc: "无",                //简述
+            complete: false,           //次单子是否已完成
+            price: 3,
+            sex: 2,                   //性别1为男，2为女
+            username: "网名",         //发布者的网名
+            releaseTime: "7月7日"     //发布时间
+          }
+        ]
       }
     },
     methods: {
@@ -187,6 +84,9 @@
       },
       hideMask(isShow){
         this.isFilter = !isShow;
+      },
+      helpDetails(id){
+          console.log(id)
       }
     },
     components: {

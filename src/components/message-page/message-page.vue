@@ -1,43 +1,33 @@
 <template>
   <div class="news-page">
     <v-header>消息</v-header>
-    <div class="nav">
-      <a href="javascript:void(0)" class="nav-item" @click="currentClick(0)"
-         :class="{'active':currentIndex === 0}">附近</a>
-      <a href="javascript:void(0)" class="nav-item" @click="currentClick(1)"
-         :class="{'active':currentIndex === 1}">消息</a>
-    </div>
-    <div class="content" ref="contentWrapper">
-      <div class="wrapper" ref="wrapper">
-        <div class="item">1</div>
-        <div class="item">
-          <scroll class="item-wrapper">
-            <ul>
-              <li class="record-item">
-                <div class="icon"><img src="../../assets/logo.png" alt=""></div>
-                <div class="info">
-                  <h3 class="alias">xxxx</h3>
-                  <p class="last-record">xxxxx</p>
-                </div>
-                <div class="num-time">
-                  <p class="num">2</p>
-                  <p class="time">MM:ss</p>
-                </div>
-              </li>
-              <li class="record-item">
-                <div class="icon"><img src="../../assets/logo.png" alt=""></div>
-                <div class="info">
-                  <h3 class="alias">xxxx</h3>
-                  <p class="last-record">
-                    我啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦</p>
-                </div>
-                <div class="num-time">
-                  <p class="num">2</p>
-                  <p class="time">MM:ss</p>
-                </div>
-              </li>
-            </ul>
-          </scroll>
+    <div>
+      <div class="nav">
+        <a href="javascript:void(0)" class="nav-item" @click="currentClick(0)"
+           :class="{'active':currentIndex === 0}">附近</a>
+        <a href="javascript:void(0)" class="nav-item" @click="currentClick(1)"
+           :class="{'active':currentIndex === 1}">消息</a>
+      </div>
+      <div class="content" ref="contentWrapper">
+        <div class="content-wrapper" ref="wrapper">
+          <div class="item">1</div>
+          <div class="item">
+            <scroll class="item-wrapper">
+              <ul>
+                <li class="record-item">
+                  <div class="icon"><img src="../../assets/logo.png" alt=""></div>
+                  <div class="info">
+                    <h3 class="alias">xxxx</h3>
+                    <p class="last-record">xxxxx</p>
+                  </div>
+                  <div class="num-time">
+                    <p class="num">2</p>
+                    <p class="time">MM:ss</p>
+                  </div>
+                </li>
+              </ul>
+            </scroll>
+          </div>
         </div>
       </div>
     </div>
@@ -48,11 +38,15 @@
   import VHeader from "base/header/header"
   import BScroll from "better-scroll"
   import Scroll from "base/scroll/scroll"
+  import Login from "base/login/login"
+  import LoginPage from "components/login-page/login-page"
+  import {mapGetters, mapMutations} from "vuex"
 
   export default {
     data(){
       return {
-        currentIndex: 0
+        currentIndex: 0,
+        isOne: true
       }
     },
     mounted(){
@@ -60,17 +54,20 @@
         this._initSliderWidth();
         this._initSlider();
       })
-
       window.addEventListener('resize', () => {
         if (!this.contentWrapper) {
           return;
         }
-        this._initSliderWidth(true);
+        this._initSliderWidth();
         this.contentWrapper.refresh();
       })
     },
+    created(){
+      this.a();
+    },
     methods: {
-      _initSliderWidth(isResize){
+      _initSliderWidth(){
+        console.log(1)
         this.children = this.$refs.wrapper.children;
 
         let width = 0;
@@ -81,9 +78,6 @@
           width += contentWidth;
         }
 
-        if (!isResize) {
-          width += contentWidth;
-        }
         this.$refs.wrapper.style.width = width + 'px';
 
       },
@@ -108,13 +102,30 @@
           return;
         }
         this.currentIndex = index;
-        let contentWidth = this.$refs.contentWrapper.clientWidth;
-        this.contentWrapper.scrollTo(-(this.currentIndex * contentWidth), 0);
-      }
+        this.contentWrapper.goToPage(this.currentIndex, 0);
+      },
+      clickLogin(){
+        this.setLoginPage(true);
+      },
+      a(){
+        if (this.isLogin) {
+          console.log(1)
+        }
+      },
+      ...mapMutations({
+        setLoginPage: "SET_LOGINPAGE"
+      })
+    },
+    computed: {
+      ...mapGetters([
+        'isLogin'
+      ])
     },
     components: {
       VHeader,
-      Scroll
+      Scroll,
+      Login,
+      LoginPage
     }
   }
 </script>
@@ -147,20 +158,21 @@
       left: 0;
       right: 0;
       overflow: hidden;
-      .wrapper {
+      .content-wrapper {
         position: relative;
-        top:0;
-        bottom:0;
+        height: 100%;
         .item {
           position: relative;
           float: left;
+          height: 100%;
         }
         .item-wrapper {
           position: absolute;
           top: 0;
-          bottom: 0;
+          bottom: 10px;
           left: 0;
           right: 0;
+          overflow: hidden;
         }
       }
       .record-item {
