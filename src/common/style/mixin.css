@@ -36,3 +36,9 @@ html {
   clear: both;
   visibility: hidden;
 }
+/*文字垂直居中*/
+.dis-flex {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}

@@ -50,8 +50,8 @@
         helps: [
           {
             id: 1,                     //唯一标示
-            userIcon: "http://img0.imgtn.bdimg.com/it/u=1761296115,4222626325&fm=26&gp=0.jpg",
-            type: 1,                    //单子类型1为快递
+            userIcon: "http://scimg.jb51.net/touxiang/201704/2017041921224424.jpg",
+            type:1,                    //单子类型1为快递
             address: "xxxxxxxxxx",     //地址
             desc: "无",                //简述
             complete: true,           //次单子是否已完成
@@ -62,13 +62,13 @@
           },
           {
             id: 2,                     //唯一标示
-            userIcon: "http://img0.imgtn.bdimg.com/it/u=1761296115,4222626325&fm=26&gp=0.jpg",
-            type: 1,                    //单子类型1为快递
+            userIcon: "http://scimg.jb51.net/touxiang/201704/2017041921224424.jpg",
+            type:1,                    //单子类型1为快递
             address: "xxxxxxxxxx",     //地址
             desc: "无",                //简述
             complete: false,           //次单子是否已完成
             price: 3,
-            sex: 2,                   //性别1为男，2为女
+            sex: 1,                   //性别1为男，2为女
             username: "网名",         //发布者的网名
             releaseTime: "7月7日"     //发布时间
           }

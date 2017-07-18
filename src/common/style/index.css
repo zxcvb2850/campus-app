@@ -36,6 +36,12 @@ html {
   clear: both;
   visibility: hidden;
 }
+/*文字垂直居中*/
+.dis-flex {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 @font-face {
   font-family: "iconfont";
   src: url('../fonts/iconfont.eot?t=1499784778448');
