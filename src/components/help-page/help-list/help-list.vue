@@ -15,7 +15,7 @@
     <v-mask @clickMask="hideMask" :isFilter="isFilter"></v-mask>
     <scroll class="help-wrapper">
       <ul>
-        <li class="help-item" @click="helpDetails(help.id)" v-for="(help,index) in helps">
+        <li class="help-item" @click="helpDetails(help)" v-for="(help,index) in helps">
           <div class="center">
             <div class="user-icon"><img :src="help.userIcon" alt=""></div>
             <div class="demand">
@@ -27,12 +27,15 @@
             <div class="price"><span>{{help.price}}</span>￥</div>
           </div>
           <div class="footer">
-            <div class="sex"><span class="icon" :class="help.sex === 1?'icon-boy':'icon-girl'"></span><span>{{help.username}}</span></div>
+            <div class="sex"><span class="icon"
+                                   :class="help.sex === 1?'icon-boy':'icon-girl'"></span><span>{{help.username}}</span>
+            </div>
             <div class="time">发布时间:<span>{{help.releaseTime}}</span></div>
           </div>
         </li>
       </ul>
     </scroll>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -47,8 +50,8 @@
         helps: [
           {
             id: 1,                     //唯一标示
-            userIcon: "http://imgsrc.baidu.com/forum/w%3D580%3B/sign=a1263be45b0fd9f9a01755611516d62a/30adcbef76094b36e6710f75a9cc7cd98c109d42.jpg",
-            type:1,                    //单子类型1为快递
+            userIcon: "http://img0.imgtn.bdimg.com/it/u=1761296115,4222626325&fm=26&gp=0.jpg",
+            type: 1,                    //单子类型1为快递
             address: "xxxxxxxxxx",     //地址
             desc: "无",                //简述
             complete: true,           //次单子是否已完成
@@ -59,8 +62,8 @@
           },
           {
             id: 2,                     //唯一标示
-            userIcon: "http://imgsrc.baidu.com/forum/w%3D580%3B/sign=a1263be45b0fd9f9a01755611516d62a/30adcbef76094b36e6710f75a9cc7cd98c109d42.jpg",
-            type:1,                    //单子类型1为快递
+            userIcon: "http://img0.imgtn.bdimg.com/it/u=1761296115,4222626325&fm=26&gp=0.jpg",
+            type: 1,                    //单子类型1为快递
             address: "xxxxxxxxxx",     //地址
             desc: "无",                //简述
             complete: false,           //次单子是否已完成
@@ -85,8 +88,10 @@
       hideMask(isShow){
         this.isFilter = !isShow;
       },
-      helpDetails(id){
-          console.log(id)
+      helpDetails(item){
+        this.$router.push({
+          path: `/helpPage/helpList/${item.id}`
+        });
       }
     },
     components: {
