@@ -44,9 +44,9 @@ html {
 }
 @font-face {
   font-family: "iconfont";
-  src: url('../fonts/iconfont.eot?t=1499784778448');
+  src: url('../fonts/iconfont.eot?t=1500471385506');
   /* IE9*/
-  src: url('../fonts/iconfont.eot?t=1499784778448#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('../fonts/iconfont.woff?t=1499784778448') format('woff'), /* chrome, firefox */ url('../fonts/iconfont.ttf?t=1499784778448') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/ url('../fonts/iconfont.svg?t=1499784778448#iconfont') format('svg');
+  src: url('../fonts/iconfont.eot?t=1500471385506#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('../fonts/iconfont.woff?t=1500471385506') format('woff'), /* chrome, firefox */ url('../fonts/iconfont.ttf?t=1500471385506') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/ url('../fonts/iconfont.svg?t=1500471385506#iconfont') format('svg');
   /* iOS 4.1- */
 }
 .icon {
@@ -65,6 +65,9 @@ html {
 .icon-boy:before {
   content: "\e66e";
 }
+.icon-order:before {
+  content: "\e663";
+}
 .icon-guanbi:before {
   content: "\e614";
 }
@@ -80,6 +83,12 @@ html {
 .icon-caidan:before {
   content: "\e662";
 }
+.icon-shoppingcart2:before {
+  content: "\e61c";
+}
+.icon-setup:before {
+  content: "\e61a";
+}
 .icon-message1:before {
   content: "\e60e";
 }
@@ -89,11 +98,35 @@ html {
 .icon-my:before {
   content: "\e601";
 }
+.icon-xue:before {
+  content: "\e60f";
+}
+.icon-iconcanteen01:before {
+  content: "\e631";
+}
+.icon-snacks:before {
+  content: "\e630";
+}
+.icon-icon-yxj-express:before {
+  content: "\e667";
+}
+.icon-fankui:before {
+  content: "\e637";
+}
 .icon-ranking:before {
   content: "\e67b";
 }
 .icon-iconcompleted:before {
   content: "\e660";
+}
+.icon-other:before {
+  content: "\e628";
+}
+.icon-yinxiang:before {
+  content: "\e63f";
+}
+.icon-daijinquan:before {
+  content: "\e642";
 }
 .icon-suspend:before {
   content: "\e751";
@@ -106,4 +139,7 @@ html {
 }
 .icon-sousuo_sousuo:before {
   content: "\e59c";
+}
+.icon-upload-demo:before {
+  content: "\e693";
 }

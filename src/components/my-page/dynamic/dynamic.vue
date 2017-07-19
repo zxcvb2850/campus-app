@@ -1,9 +1,6 @@
 <template>
   <div class="dynamic">
-    <img src="../../../assets/logo.png" alt="">
-    <img src="../../../assets/logo.png" alt="">
-    <img src="../../../assets/logo.png" alt="">
-    <img src="../../../assets/logo.png" alt="">
+    <img src="../../../assets/1.jpg" alt="">
   </div>
 </template>
 

@@ -34,6 +34,7 @@
     bottom: @tabHeight;
     left: 0;
     right: 0;
+    z-index:2;
     .nav {
       display: flex;
       height: @tabHeight/2;

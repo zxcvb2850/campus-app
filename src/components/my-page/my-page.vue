@@ -5,8 +5,9 @@
     <div class="my-wrapper" v-show="isLogin">
       <div class="header" ref="header">
         <div class="back" ref="back">
-          <i class="icon icon-jiantouicon icon-back"></i>
+          <i class="icon icon-xue"></i>
           <h2 class="title" v-show="showTitle" ref="title">我的详情</h2>
+          <i class="icon icon-setup"></i>
         </div>
         <div class="filter" :style="bgStyle"></div>
         <div class="user-info">
@@ -35,10 +36,10 @@
       <scroll :probe-type="probeType" :listen-scroll="listenScroll" @scroll="scroll" class="nav" ref="nav">
         <div>
           <ul class="nav-wrapper">
-            <li class="nav-item">订单</li>
-            <li class="nav-item">赏金卷</li>
-            <li class="nav-item">印象</li>
-            <li class="nav-item">反馈</li>
+            <li class="nav-item"><i class="icon icon-order"></i><span>订单</span></li>
+            <li class="nav-item"><i class="icon icon-daijinquan"></i><span>赏金卷</span></li>
+            <li class="nav-item"><i class="icon icon-yinxiang"></i><span>印象</span></li>
+            <li class="nav-item"><i class="icon icon-fankui"></i><span>反馈</span></li>
           </ul>
           <div class="user-dynamic">
             <div class="dynamic-nav">
@@ -123,7 +124,7 @@
         this.$refs.layer.style['transform'] = `translate3d(0,${translateY}px,0)`;
         this.$refs.layer.style['webkitTransform'] = `translate3d(0,${translateY}px,0)`;
 
-        if (newY < this.minTransalteY) {
+        if (newY < this.minTranslateY) {
           zIndex = 10
           this.$refs.header.style.paddingTop = 0
           this.$refs.header.style.height = `${HEAD_HEIGHT}px`
@@ -138,6 +139,7 @@
         }
         this.$refs.header.style['transform'] = `scale(${scale})`;
         this.$refs.header.style['webkitTransform'] = `scale(${scale})`;
+        this.$refs.header.style.zIndex = zIndex;
       }
     },
     components: {
@@ -157,7 +159,7 @@
     bottom: @tabHeight;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: 0;
     overflow: hidden;
     .my-wrapper {
       position: relative;
@@ -169,13 +171,18 @@
         left: 0;
         width: 100%;
         height: @headerHeight;
-        z-index: 50;
+        z-index: 2;
         transition: all .3s;
-        .icon-back {
+        .icon {
           display: block;
           padding: 10px;
-          font-size: @itemTitleFontSize;
+          font-size: @maxIconFontSize;
           color: @tabBackground;
+          &.icon-setup{
+            position: absolute;
+            top:0;
+            right:0;
+          }
         }
         .title {
           position: absolute;
@@ -206,7 +213,7 @@
         }
         .user-info {
           position: absolute;
-          top: 20%;
+          top: 50px;
           left: @tabHeight;
           width: 100%;
         }
@@ -258,7 +265,7 @@
       .bg-layer {
         position: relative;
         height: 100%;
-        background-color: @tabBackground;
+        background-color: @headerColor;
       }
       .nav {
         position: fixed;
@@ -266,7 +273,7 @@
         bottom: @tabHeight;
         left: 0;
         right: 0;
-        background-color: @tabBackground;
+        background-color: @headerColor;
         /*overflow: hidden;*/
       }
       .nav-wrapper {
@@ -277,6 +284,16 @@
         .nav-item {
           flex: 1;
           .dis-flex;
+          line-height: @maxIconFontSize;
+          i {
+            font-size: @maxFontSize;
+          }
+          &:nth-child(even) i {
+            color: @iconColorEven;
+          }
+          &:nth-child(odd) i {
+            color: @iconColorOdd;
+          }
         }
       }
       .user-dynamic {

@@ -5,7 +5,7 @@
       <p class="select-type">选择类型</p>
       <ul class="item-wrapper">
         <li class="re-item" :class="{'active':index === cur}" v-for="(item,index) in releases"
-            @click="select(item,index)">{{item.text}}
+            @click="select(item,index)"><i class="icon" :class="item.icon"></i><span>{{item.text}}</span>
         </li>
       </ul>
     </div>
@@ -28,26 +28,32 @@
         releases: [
           {
             "id": 1,
+            "icon": "icon-setup",
             "text": "食堂餐"
           },
           {
             "id": 2,
+            "icon": "icon-icon-yxj-express",
             "text": "取快递"
           },
           {
             "id": 3,
+            "icon": "icon-shoppingcart2",
             "text": "帮购物"
           },
           {
             "id": 4,
+            "icon": "icon-snacks",
             "text": "周边小吃"
           },
           {
             "id": 5,
+            "icon": "icon-upload-demo",
             "text": "帮摄影"
           },
           {
             "id": 6,
+            "icon": "icon-other",
             "text": "其他"
           },
         ],
@@ -125,18 +131,38 @@
         .border-1px(@mainTextColor)
       }
       .item-wrapper {
+        margin: 0 auto;
+        width: 80%;
         text-align: center;
         font-size: 0;
+        overflow: hidden;
       }
       .re-item {
-        display: inline-block;
+        float: left;
         padding: 20px;
         .box-sizing;
-        width: 30%;
+        .dis-flex;
+        width: 33%;
+        line-height: @maxFontSize;
+        text-align: center;
         font-size: 14px;
+        i {
+          margin-bottom: 10px;
+          width: @tabHeight;
+          height: @tabHeight;
+          line-height:@tabHeight;
+          text-align: center;
+          border-radius: 50%;
+          border: 1px solid @importantColor;
+          font-size: @maxIconFontSize;
+        }
         &.active {
           color: @tabBackground;
           background-color: @filterBackground;
+          i{
+            border-color: #fff;
+            color: #fff;
+          }
         }
       }
     }

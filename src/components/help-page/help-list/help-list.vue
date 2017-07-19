@@ -19,7 +19,7 @@
           <div class="center">
             <div class="user-icon"><img :src="help.userIcon" alt=""></div>
             <div class="demand">
-              <h3 class="title">{{help.type}}(1为快递，要转)</h3>
+              <h3 class="title" v-html="helpType(help.type)"></h3>
               <p class="address">{{help.address}}</p>
               <p class="desc">简述：<span>{{help.desc}}</span></p>
               <p class="complete icon icon-iconcompleted" v-show="help.complete"></p>
@@ -42,6 +42,7 @@
 <script>
   import Scroll from "base/scroll/scroll"
   import VMask from "base/mask/mask"
+  import {transformType} from "common/js/transform"
 
   export default {
     data(){
@@ -51,7 +52,7 @@
           {
             id: 1,                     //唯一标示
             userIcon: "http://scimg.jb51.net/touxiang/201704/2017041921224424.jpg",
-            type:1,                    //单子类型1为快递
+            type: 1,                    //单子类型1为快递
             address: "xxxxxxxxxx",     //地址
             desc: "无",                //简述
             complete: true,           //次单子是否已完成
@@ -63,7 +64,7 @@
           {
             id: 2,                     //唯一标示
             userIcon: "http://scimg.jb51.net/touxiang/201704/2017041921224424.jpg",
-            type:1,                    //单子类型1为快递
+            type: 2,                    //单子类型1为快递
             address: "xxxxxxxxxx",     //地址
             desc: "无",                //简述
             complete: false,           //次单子是否已完成
@@ -92,6 +93,9 @@
         this.$router.push({
           path: `/helpPage/helpList/${item.id}`
         });
+      },
+      helpType(type){
+        return transformType(type);
       }
     },
     components: {
