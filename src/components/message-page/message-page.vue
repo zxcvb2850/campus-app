@@ -62,12 +62,8 @@
         this.contentWrapper.refresh();
       })
     },
-    created(){
-      this.a();
-    },
     methods: {
       _initSliderWidth(){
-        console.log(1)
         this.children = this.$refs.wrapper.children;
 
         let width = 0;
@@ -106,11 +102,6 @@
       },
       clickLogin(){
         this.setLoginPage(true);
-      },
-      a(){
-        if (this.isLogin) {
-          console.log(1)
-        }
       },
       ...mapMutations({
         setLoginPage: "SET_LOGINPAGE"

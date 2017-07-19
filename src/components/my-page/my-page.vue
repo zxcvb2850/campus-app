@@ -3,7 +3,11 @@
     <login v-show="!isLogin" @clickLogin="clickLogin"></login>
     <login-page></login-page>
     <div class="my-wrapper" v-show="isLogin">
-      <div class="header">
+      <div class="header" ref="header">
+        <div class="back" ref="back">
+          <i class="icon icon-jiantouicon icon-back"></i>
+          <h2 class="title" v-show="showTitle" ref="title">我的详情</h2>
+        </div>
         <div class="filter" :style="bgStyle"></div>
         <div class="user-info">
           <div class="user-data">
@@ -27,25 +31,28 @@
           <p class="autograph">我是来自南方的一匹狼</p>
         </div>
       </div>
-      <div class="nav">
-        <ul class="nav-wrapper">
-          <li class="nav-item">订单</li>
-          <li class="nav-item">赏金卷</li>
-          <li class="nav-item">印象</li>
-          <li class="nav-item">反馈</li>
-        </ul>
-      </div>
-      <div class="user-dynamic">
-        <div class="dynamic-nav">
-          <a href="javascript:void(0)" class="nav-item">我的动态</a>
-          <a href="javascript:void(0)" class="nav-item">课程表</a>
+      <div class="bg-layer" ref="layer"></div>
+      <scroll :probe-type="probeType" :listen-scroll="listenScroll" @scroll="scroll" class="nav" ref="nav">
+        <div>
+          <ul class="nav-wrapper">
+            <li class="nav-item">订单</li>
+            <li class="nav-item">赏金卷</li>
+            <li class="nav-item">印象</li>
+            <li class="nav-item">反馈</li>
+          </ul>
+          <div class="user-dynamic">
+            <div class="dynamic-nav">
+              <router-link to="dynamic" class="nav-item">我的动态
+              </router-link>
+              <router-link to="schedule" class="nav-item">课程表
+              </router-link>
+            </div>
+          </div>
+          <div class="content" ref="content">
+            <router-view></router-view>
+          </div>
         </div>
-        <div class="content">
-          <div></div>
-        </div>
-        <div>我是动态页面</div>
-        <div>我是课程表页面</div>
-      </div>
+      </scroll>
     </div>
   </div>
 </template>
@@ -54,12 +61,23 @@
   import Login from 'base/login/login'
   import LoginPage from 'components/login-page/login-page'
   import {mapGetters, mapMutations} from 'vuex'
+  import BScroll from 'better-scroll'
+  import Scroll from 'base/scroll/scroll'
+
+  const HEAD_HEIGHT = 40;
 
   export default {
     props: {
       bgImage: {
         type: String,
         default: ''
+      }
+    },
+    data(){
+      return {
+        currentIndex: 0,
+        scrollY: 0,
+        showTitle: false
       }
     },
     computed: {
@@ -70,7 +88,19 @@
         'isLogin'
       ])
     },
+    created(){
+      this.probeType = 3;
+      this.listenScroll = true;
+    },
+    mounted(){
+      this.headerHeight = this.$refs.header.clientHeight;
+      this.minTranslateY = -this.headerHeight + HEAD_HEIGHT;
+      this.$refs.nav.$el.style.top = `${this.headerHeight - 0.5}px`;
+    },
     methods: {
+      scroll(pos){
+        this.scrollY = pos.y;
+      },
       clickLogin(){
         this.setLoginPage(true)
       },
@@ -78,9 +108,42 @@
         setLoginPage: "SET_LOGINPAGE"
       })
     },
+    watch: {
+      scrollY(newY){
+        let translateY = Math.max(this.minTranslateY, newY);
+        let zIndex = 0;
+        let scale = 1;
+        if (translateY <= this.minTranslateY) {
+          this.$refs.back.style.backgroundColor = '#2e9fff';
+          this.showTitle = true;
+        } else {
+          this.$refs.back.style.backgroundColor = '';
+          this.showTitle = false;
+        }
+        this.$refs.layer.style['transform'] = `translate3d(0,${translateY}px,0)`;
+        this.$refs.layer.style['webkitTransform'] = `translate3d(0,${translateY}px,0)`;
+
+        if (newY < this.minTransalteY) {
+          zIndex = 10
+          this.$refs.header.style.paddingTop = 0
+          this.$refs.header.style.height = `${HEAD_HEIGHT}px`
+        } else {
+          this.$refs.header.style.paddingTop = '70%'
+          this.$refs.header.style.height = 0
+        }
+
+        const percent = Math.abs(newY / this.headerHeight);
+        if (newY > 0) {
+          scale = 1 + percent;
+        }
+        this.$refs.header.style['transform'] = `scale(${scale})`;
+        this.$refs.header.style['webkitTransform'] = `scale(${scale})`;
+      }
+    },
     components: {
       Login,
-      LoginPage
+      LoginPage,
+      Scroll
     }
   }
 </script>
@@ -89,7 +152,40 @@
   @import '~common/style/index';
 
   .my-page {
+    position: fixed;
+    top: 0;
+    bottom: @tabHeight;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    overflow: hidden;
     .my-wrapper {
+      position: relative;
+      height: 100%;
+      overflow: hidden;
+      .back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: @headerHeight;
+        z-index: 50;
+        transition: all .3s;
+        .icon-back {
+          display: block;
+          padding: 10px;
+          font-size: @itemTitleFontSize;
+          color: @tabBackground;
+        }
+        .title {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          line-height: @headerHeight;
+          text-align: center;
+        }
+      }
       .header {
         position: relative;
         width: 100%;
@@ -159,22 +255,35 @@
           .no-wrap;
         }
       }
-      .nav {
+      .bg-layer {
         position: relative;
-        .nav-wrapper {
-          display: flex;
-          text-align: center;
-          height: @tabHeight;
-          .border-1px(@divisionLine);
-          .nav-item {
-            flex: 1;
-            .dis-flex;
-          }
+        height: 100%;
+        background-color: @tabBackground;
+      }
+      .nav {
+        position: fixed;
+        top: 0;
+        bottom: @tabHeight;
+        left: 0;
+        right: 0;
+        background-color: @tabBackground;
+        /*overflow: hidden;*/
+      }
+      .nav-wrapper {
+        display: flex;
+        text-align: center;
+        height: @tabHeight;
+        .border-1px(@divisionLine);
+        .nav-item {
+          flex: 1;
+          .dis-flex;
         }
       }
       .user-dynamic {
+        width: 100%;
         .dynamic-nav {
           display: flex;
+          width: 100%;
           height: @headerHeight;
           line-height: @headerHeight;
           text-align: center;
@@ -183,12 +292,15 @@
             flex: 1;
             text-decoration: none;
             color: #000;
-            &.active{
+            &.active {
               color: @importantColor;
               border-bottom: 1px solid @filterBackground;
             }
           }
         }
+      }
+      .content {
+        width: 100%;
       }
     }
   }
