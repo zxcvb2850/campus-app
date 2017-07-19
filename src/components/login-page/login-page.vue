@@ -1,20 +1,24 @@
 <template>
-  <transition name="slide">
+  <div class="login-wrapper">
+    <div class="go-login">
+      <p class="desc">需要登录</p>
+      <h2 class="login-btn"><a href="javascript:void(0)" @click="goLogin">登录</a></h2>
+    </div>
     <div class="login-page" v-show="loginPage">
       <transition name="slide">
-        <div class="login-form" v-show="isLogin">
+        <div class="login-form" v-show="isSignIn">
           <div class="logo"><img src="../../assets/logo.png" alt=""></div>
           <input name="username" type="text" placeholder="手机号：">
           <input name="password" type="password" placeholder="密码：">
           <input type="submit" name="type" @click="submit" class="button-blue login" value="登录">
           <div class="clearfix"></div>
-          <a class="remember" @click="goLogin">还没有账号？注册</a>
+          <a class="remember" @click="signIn">还没有账号？注册</a>
           <a class="forgot">忘记密码？</a>
           <input type="button" name="type" class="button-gay not-logged" @click="notLogged" value="暂不登录">
         </div>
       </transition>
       <transition name="slide">
-        <div class="login-form register-form" v-show="!isLogin">
+        <div class="login-form register-form" v-show="!isSignIn">
           <div class="logo"><img src="../../assets/logo.png" alt=""></div>
           <input name="number" type="text" placeholder="手机号：">
           <input name="password1" type="password" placeholder="密码：">
@@ -25,13 +29,13 @@
           </div>
           <input type="submit" name="type" class="button-blue login" value="注册">
           <div class="clearfix"></div>
-          <a class="remember" @click="goLogin">已有账号？直接登录</a>
+          <a class="remember" @click="signIn">已有账号？直接登录</a>
           <a class="forgot">忘记密码？</a>
           <input type="button" name="type" class="button-gay not-logged" @click="notLogged" value="暂不登录">
         </div>
       </transition>
     </div>
-  </transition>
+  </div>
 </template>
 
 <script>
@@ -40,12 +44,15 @@
   export default {
     data(){
       return {
-        isLogin: true
+        isSignIn: true
       }
     },
     methods: {
+      signIn(){
+        this.isSignIn = !this.isSignIn
+      },
       goLogin(){
-        this.isLogin = !this.isLogin;
+        this.setLoginPage(true)
       },
       submit(){
         let username = document.querySelector('.login-page input[name="username"]');
@@ -78,6 +85,33 @@
 
 <style lang="less" scoped>
   @import "~common/style/index";
+
+  .go-login {
+    margin: 30px auto;
+    width: 100%;
+    .desc {
+      margin-bottom: 30px;
+      text-align: center;
+      color: @mainTextColor;
+      font-size: @mainFontSize;
+    }
+    .login-btn {
+      text-align: center;
+      a {
+        display: block;
+        margin: 0 auto;
+        width: 80%;
+        height: @headerHeight;
+        line-height: @headerHeight;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: @tabBackground;
+        background-color: @mainBackground;
+      }
+    }
+  }
 
   .login-page {
     position: fixed;

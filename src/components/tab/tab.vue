@@ -16,7 +16,7 @@
       </router-link>
     </div>
     <div class="tab-item">
-      <router-link to="/myPage" tag="div">
+      <router-link to="/loginPage" tag="div">
         <p><span class="icon icon-my"></span>我的</p>
       </router-link>
     </div>
