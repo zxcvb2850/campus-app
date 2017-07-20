@@ -142,7 +142,6 @@
           if (res.error === ERR_OR) {
             this.isShow = !this.isShow
             this.contacts = this._normalizeSinger(res.data.list);
-            console.log(this.contacts)
           }
         }).catch((err) => {
           console.log(err)
