@@ -32,9 +32,6 @@
   import {mapGetters} from "vuex"
 
   export default {
-    created(){
-      console.log(this.isLogin)
-    },
     computed: {
       ...mapGetters([
         "isLogin"

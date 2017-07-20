@@ -9,8 +9,8 @@
            :class="{'active':currentIndex === 1}">消息</a>
       </div>
       <div class="filter-part">
-        <p class="contacts" @click="contacts">联系人</p>
-        <p class="add-user" @click="addUser">11111</p>
+        <p class="contacts" @click="contact">联系人</p>
+        <p class="add-user" @click="addUser">添加</p>
       </div>
       <div class="content" ref="contentWrapper">
         <div class="content-wrapper" ref="wrapper">
@@ -57,6 +57,7 @@
           </div>
         </div>
       </div>
+      <contact-list :contacts="contacts" v-show="isShow"></contact-list>
     </div>
   </div>
 </template>
@@ -67,13 +68,18 @@
   import Scroll from "base/scroll/scroll"
   import Login from "base/login/login"
   import LoginPage from "components/login-page/login-page"
+  import ContactList from "components/contact-list/contact-list"
   import {mapGetters, mapMutations} from "vuex"
+
+  const ERR_OR = 0;
 
   export default {
     data(){
       return {
         currentIndex: 0,
-        isOne: true
+        isOne: true,
+        isShow: false,
+        contacts: []
       }
     },
     mounted(){
@@ -130,8 +136,45 @@
         this.currentIndex = index;
         this.contentWrapper.goToPage(this.currentIndex, 0);
       },
-      contacts(){
-        console.log(1)
+      contact(){
+        this.$http.get("/api/data").then((res) => {
+          res = res.data;
+          if (res.error === ERR_OR) {
+            this.isShow = !this.isShow
+            this.contacts = this._normalizeSinger(res.data.list);
+            console.log(this.contacts)
+          }
+        }).catch((err) => {
+          console.log(err)
+        })
+      },
+      _normalizeSinger(list){
+        let map = {};
+        list.forEach((item) => {
+          const key = item.Findex;
+          if (!map[key]) {
+            map[key] = {
+              title: key,
+              items: []
+            }
+          }
+          map[key].items.push({
+            name: item.Fsinger_name
+          })
+        })
+
+        //为了得到有序列表，我们需要处理map
+        let ret = [];
+        for (let key in map) {
+          let val = map[key];
+          if (val.title.match(/[a-zA-Z]/)) {
+            ret.push(val);
+          }
+        }
+        ret.sort((a, b) => {
+          return a.title.charCodeAt(0) - b.title.charCodeAt(0)
+        })
+        return ret;
       },
       addUser(){
         console.log(2)
@@ -152,7 +195,8 @@
       VHeader,
       Scroll,
       Login,
-      LoginPage
+      LoginPage,
+      ContactList
     }
   }
 </script>
