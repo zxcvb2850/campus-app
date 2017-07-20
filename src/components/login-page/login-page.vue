@@ -60,8 +60,10 @@
         if (username.value === this.username && password.value === this.password) {
           this.setLoginPage(false)
           this.setLogin(true)
+          this.$router.push('/myPage');
         } else {
           console.log("帐号或者密码不正确")
+          this.$router.push('/loginPage');
         }
       },
       notLogged(){

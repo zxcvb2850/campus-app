@@ -3,8 +3,6 @@
     <div class="filter-part">
       <p class="filter" v-show="isLogin" @click="release">发布</p>
     </div>
-    <login v-show="!isLogin" @clickLogin="clickLogin"></login>
-    <login-page></login-page>
     <router-view></router-view>
     <div class="seek-add" v-show="!seekList.length && isLogin">
       <div class="seek-add-wrapper">

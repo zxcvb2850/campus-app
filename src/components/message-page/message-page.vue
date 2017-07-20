@@ -8,9 +8,36 @@
         <a href="javascript:void(0)" class="nav-item" @click="currentClick(1)"
            :class="{'active':currentIndex === 1}">消息</a>
       </div>
+      <div class="filter-part">
+        <p class="contacts" @click="contacts">联系人</p>
+        <p class="add-user" @click="addUser">11111</p>
+      </div>
       <div class="content" ref="contentWrapper">
         <div class="content-wrapper" ref="wrapper">
-          <div class="item">1</div>
+          <div class="item">
+            <li class="record-item">
+              <div class="icon"><img src="../../assets/logo.png" alt=""></div>
+              <div class="info">
+                <h3 class="alias">xxxx</h3>
+                <p class="last-record">xxxxx</p>
+              </div>
+              <div class="num-time">
+                <p class="num">3</p>
+                <p class="time">MM:ss</p>
+              </div>
+            </li>
+            <li class="record-item">
+              <div class="icon"><img src="../../assets/logo.png" alt=""></div>
+              <div class="info">
+                <h3 class="alias">xxxx</h3>
+                <p class="last-record">xxxxx</p>
+              </div>
+              <div class="num-time">
+                <p class="num">0</p>
+                <p class="time">MM:ss</p>
+              </div>
+            </li>
+          </div>
           <div class="item">
             <scroll class="item-wrapper">
               <ul>
@@ -50,6 +77,9 @@
       }
     },
     mounted(){
+      if (!this.isLogin) {
+        this.$router.push('/loginPage');
+      }
       this.$nextTick(() => {
         this._initSliderWidth();
         this._initSlider();
@@ -100,6 +130,12 @@
         this.currentIndex = index;
         this.contentWrapper.goToPage(this.currentIndex, 0);
       },
+      contacts(){
+        console.log(1)
+      },
+      addUser(){
+        console.log(2)
+      },
       clickLogin(){
         this.setLoginPage(true);
       },
@@ -140,6 +176,21 @@
         &.active {
           color: @mainBackground;
         }
+      }
+    }
+    .filter-part {
+      width: 100%;
+      .contacts, .add-user {
+        position: absolute;
+        top: 0;
+        height: @headerHeight;
+        line-height: @headerHeight;
+      }
+      .contacts {
+        left: 10px;
+      }
+      .add-user {
+        right: 10px;
       }
     }
     .content {

@@ -4,7 +4,7 @@
 const state = {
   username: "1",
   password: "1",
-  isLogin: true,
+  isLogin: false,
   loginPage: false
 }
 

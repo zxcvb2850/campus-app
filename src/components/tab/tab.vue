@@ -5,7 +5,7 @@
         <p><span class="icon icon-index"></span>帮助</p>
       </router-link>
     </div>
-    <div class="tab-item">
+    <div class="tab-item" v-if="isLogin">
       <router-link to="/newsPage" tag="div">
         <p><span class="icon icon-message1"></span>消息</p>
       </router-link>
@@ -15,8 +15,13 @@
         <p><span class="icon icon-find"></span>发现</p>
       </router-link>
     </div>
-    <div class="tab-item">
+    <div class="tab-item" v-if="!isLogin">
       <router-link to="/loginPage" tag="div">
+        <p><span class="icon icon-my"></span>我的</p>
+      </router-link>
+    </div>
+    <div class="tab-item" v-if="isLogin">
+      <router-link to="/myPage" tag="div">
         <p><span class="icon icon-my"></span>我的</p>
       </router-link>
     </div>
@@ -24,7 +29,18 @@
 </template>
 
 <script>
-  export default {}
+  import {mapGetters} from "vuex"
+
+  export default {
+    created(){
+      console.log(this.isLogin)
+    },
+    computed: {
+      ...mapGetters([
+        "isLogin"
+      ])
+    }
+  }
 </script>
 
 <style lang="less" scoped>
@@ -32,10 +48,10 @@
 
   .tab {
     position: fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    z-index:1;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
     display: flex;
     height: @tabHeight;
     line-height: @tabHeight;
@@ -48,10 +64,10 @@
         text-decoration: none;
         font-size: @mainFontSize;
         color: @mainTextColor;
-        span{
+        span {
           display: block;
           height: 14px;
-          line-height:40px;
+          line-height: 40px;
           font-size: @headerFontSize;
         }
         &.active {

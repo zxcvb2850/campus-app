@@ -1,7 +1,5 @@
 <template>
   <div class="my-page">
-    <login v-show="!isLogin" @clickLogin="clickLogin"></login>
-    <login-page></login-page>
     <div class="my-wrapper" v-show="isLogin">
       <div class="header" ref="header">
         <div class="back" ref="back">
@@ -12,7 +10,7 @@
         <div class="filter" :style="bgStyle"></div>
         <div class="user-info">
           <div class="user-data">
-            <div class="icon-wrapper"><img src="../../assets/logo.png" alt=""></div>
+            <div class="icon-wrapper"><img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=403143490,1710226245&fm=117&gp=0.jpg" alt=""></div>
             <ul class="data">
               <li>
                 <p>段位</p>
@@ -94,6 +92,9 @@
       this.listenScroll = true;
     },
     mounted(){
+      if (!this.isLogin) {
+        this.$router.push('/loginPage');
+      }
       this.headerHeight = this.$refs.header.clientHeight;
       this.minTranslateY = -this.headerHeight + HEAD_HEIGHT;
       this.$refs.nav.$el.style.top = `${this.headerHeight - 0.5}px`;
@@ -178,10 +179,10 @@
           padding: 10px;
           font-size: @maxIconFontSize;
           color: @tabBackground;
-          &.icon-setup{
+          &.icon-setup {
             position: absolute;
-            top:0;
-            right:0;
+            top: 0;
+            right: 0;
           }
         }
         .title {
