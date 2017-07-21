@@ -1,5 +1,5 @@
 <template>
-  <div>我的课程表</div>
+  <div class="schedule-class">我的课程表</div>
 </template>
 
 <script>
@@ -7,5 +7,8 @@
 </script>
 
 <style lang="less" scoped>
-
+  .schedule-class{
+    height: 500px;
+    background: #afafaf;
+  }
 </style>

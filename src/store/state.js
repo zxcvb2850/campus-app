@@ -2,9 +2,9 @@
  * Created by wang on 2017/7/7.
  */
 const state = {
-  username: "1",
-  password: "1",
-  isLogin: true,
+  username: "admin",
+  password: "123456",
+  isLogin: false,
   loginPage: false
 }
 

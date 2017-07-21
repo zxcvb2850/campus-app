@@ -10,7 +10,7 @@
       </div>
       <div class="filter-part">
         <p class="contacts" @click="contact">联系人</p>
-        <p class="add-user" @click="addUser">添加</p>
+        <p class="add-user" @click="addUser">+</p>
       </div>
       <div class="content" ref="contentWrapper">
         <div class="content-wrapper" ref="wrapper">
@@ -57,7 +57,7 @@
           </div>
         </div>
       </div>
-      <contact-list :contacts="contacts" v-show="isShow"></contact-list>
+      <contact-list :contacts="contacts" v-show="isShow" @contactBack="contactBack"></contact-list>
     </div>
   </div>
 </template>
@@ -99,6 +99,9 @@
       })
     },
     methods: {
+      contactBack(){
+        this.isShow = false;
+      },
       _initSliderWidth(){
         this.children = this.$refs.wrapper.children;
 
@@ -228,12 +231,14 @@
         top: 0;
         height: @headerHeight;
         line-height: @headerHeight;
+        color: #fff;
       }
       .contacts {
         left: 10px;
       }
       .add-user {
         right: 10px;
+        font-size:@maxIconFontSize;
       }
     }
     .content {
