@@ -13,7 +13,7 @@
       </transition>
     </div>
     <v-mask @clickMask="hideMask" :isFilter="isFilter"></v-mask>
-    <scroll class="help-wrapper">
+    <scroll class="help-wrapper" :data="helps">
       <ul>
         <li class="help-item" @click="helpDetails(help)" v-for="(help,index) in helps">
           <div class="center">
@@ -63,7 +63,7 @@
           },
           {
             id: 2,                     //唯一标示
-            userIcon: "http://scimg.jb51.net/touxiang/201704/2017041921224424.jpg",
+            userIcon: "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2003988139,3010807873&fm=117&gp=0.jpg",
             type: 2,                    //单子类型1为快递
             address: "xxxxxxxxxx",     //地址
             desc: "无",                //简述
@@ -71,7 +71,43 @@
             price: 3,
             sex: 1,                   //性别1为男，2为女
             username: "网名",         //发布者的网名
-            releaseTime: "7月7日"     //发布时间
+            releaseTime: "7月6日"     //发布时间
+          },
+          {
+            id: 3,
+            userIcon: "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2600862994,2565094368&fm=117&gp=0.jpg",
+            type: 3,
+            address: "xxxxxxxxxx",
+            desc: "无",
+            complete: false,
+            price: 3,
+            sex: 1,
+            username: "网名",
+            releaseTime: "7月5日"
+          },
+          {
+            id: 4,
+            userIcon: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2056064112,1057705139&fm=117&gp=0.jpg",
+            type: 4,
+            address: "xxxxxxxxxx",
+            desc: "无",
+            complete: false,
+            price: 3,
+            sex: 1,
+            username: "网名",
+            releaseTime: "7月4日"
+          },
+          {
+            id: 5,
+            userIcon: "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1486163287,1300629863&fm=117&gp=0.jpg",
+            type: 5,
+            address: "xxxxxxxxxx",
+            desc: "无",
+            complete: false,
+            price: 3,
+            sex: 1,
+            username: "网名",
+            releaseTime: "7月3日"
           }
         ]
       }
