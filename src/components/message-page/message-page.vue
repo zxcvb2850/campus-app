@@ -15,28 +15,21 @@
       <div class="content" ref="contentWrapper">
         <div class="content-wrapper" ref="wrapper">
           <div class="item">
-            <li class="record-item">
-              <div class="icon"><img src="../../assets/logo.png" alt=""></div>
-              <div class="info">
-                <h3 class="alias">xxxx</h3>
-                <p class="last-record">xxxxx</p>
-              </div>
-              <div class="num-time">
-                <p class="num">3</p>
-                <p class="time">MM:ss</p>
-              </div>
-            </li>
-            <li class="record-item">
-              <div class="icon"><img src="../../assets/logo.png" alt=""></div>
-              <div class="info">
-                <h3 class="alias">xxxx</h3>
-                <p class="last-record">xxxxx</p>
-              </div>
-              <div class="num-time">
-                <p class="num">0</p>
-                <p class="time">MM:ss</p>
-              </div>
-            </li>
+            <scroll class="item-wrapper">
+              <ul>
+                <li class="record-item" v-for="item in chats">
+                  <div class="icon"><img :src="item.userIcon" alt=""></div>
+                  <div class="info">
+                    <h3 class="alias">{{item.alias}}</h3>
+                    <p class="last-record">{{item.lastRecord}}</p>
+                  </div>
+                  <div class="num-time">
+                    <p class="num" v-show="item.num>0">{{item.num}}</p>
+                    <p class="time">{{item.lastTime}}</p>
+                  </div>
+                </li>
+              </ul>
+            </scroll>
           </div>
           <div class="item">
             <scroll class="item-wrapper">
@@ -79,7 +72,132 @@
         currentIndex: 0,
         isOne: true,
         isShow: false,
-        contacts: []
+        contacts: [],
+        chats: [
+          {
+            "userIcon": "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2635650233,2495906790&fm=117&gp=0.jpg",
+            "alias": "xxxx",
+            "lastRecord": "最后一句话",
+            "num": 3,
+            "lastTime": "MM:ss"
+          },
+          {
+            "userIcon": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2003988139,3010807873&fm=117&gp=0.jpg",
+            "alias": "xxxx",
+            "lastRecord": "最后一句话",
+            "num": 0,
+            "lastTime": "MM:ss"
+          },
+          {
+            "userIcon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2600862994,2565094368&fm=117&gp=0.jpg",
+            "alias": "xxxx",
+            "lastRecord": "最后一句话",
+            "num": 4,
+            "lastTime": "MM:ss"
+          },
+          {
+            "userIcon": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2056064112,1057705139&fm=117&gp=0.jpg",
+            "alias": "xxxx",
+            "lastRecord": "最后一句话",
+            "num": 0,
+            "lastTime": "MM:ss"
+          },
+          {
+            "userIcon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1486163287,1300629863&fm=117&gp=0.jpg",
+            "alias": "xxxx",
+            "lastRecord": "最后一句话",
+            "num": 0,
+            "lastTime": "MM:ss"
+          },
+          {
+            "userIcon": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3551563550,2594280103&fm=117&gp=0.jpg",
+            "alias": "xxxx",
+            "lastRecord": "最后一句话",
+            "num": 0,
+            "lastTime": "MM:ss"
+          },
+          {
+            "userIcon": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2286837302,1397695233&fm=117&gp=0.jpg",
+            "alias": "xxxx",
+            "lastRecord": "最后一句话",
+            "lastTime": "MM:ss"
+          },
+          {
+            "userIcon": "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2635650233,2495906790&fm=117&gp=0.jpg",
+            "alias": "xxxx",
+            "lastRecord": "最后一句话",
+            "lastTime": "MM:ss"
+          },
+          {
+            "userIcon": "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=620493834,170036947&fm=117&gp=0.jpg",
+            "alias": "xxxx",
+            "lastRecord": "最后一句话",
+            "num": 3,
+            "lastTime": "MM:ss"
+          },
+
+          {
+            "userIcon": "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2635650233,2495906790&fm=117&gp=0.jpg",
+            "alias": "xxxx",
+            "lastRecord": "最后一句话",
+            "num": 3,
+            "lastTime": "MM:ss"
+          },
+          {
+            "userIcon": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2003988139,3010807873&fm=117&gp=0.jpg",
+            "alias": "xxxx",
+            "lastRecord": "最后一句话",
+            "num": 0,
+            "lastTime": "MM:ss"
+          },
+          {
+            "userIcon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2600862994,2565094368&fm=117&gp=0.jpg",
+            "alias": "xxxx",
+            "lastRecord": "最后一句话",
+            "num": 4,
+            "lastTime": "MM:ss"
+          },
+          {
+            "userIcon": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2056064112,1057705139&fm=117&gp=0.jpg",
+            "alias": "xxxx",
+            "lastRecord": "最后一句话",
+            "num": 0,
+            "lastTime": "MM:ss"
+          },
+          {
+            "userIcon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1486163287,1300629863&fm=117&gp=0.jpg",
+            "alias": "xxxx",
+            "lastRecord": "最后一句话",
+            "num": 0,
+            "lastTime": "MM:ss"
+          },
+          {
+            "userIcon": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3551563550,2594280103&fm=117&gp=0.jpg",
+            "alias": "xxxx",
+            "lastRecord": "最后一句话",
+            "num": 0,
+            "lastTime": "MM:ss"
+          },
+          {
+            "userIcon": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2286837302,1397695233&fm=117&gp=0.jpg",
+            "alias": "xxxx",
+            "lastRecord": "最后一句话",
+            "lastTime": "MM:ss"
+          },
+          {
+            "userIcon": "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2635650233,2495906790&fm=117&gp=0.jpg",
+            "alias": "xxxx",
+            "lastRecord": "最后一句话",
+            "lastTime": "MM:ss"
+          },
+          {
+            "userIcon": "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=620493834,170036947&fm=117&gp=0.jpg",
+            "alias": "xxxx",
+            "lastRecord": "最后一句话",
+            "num": 3,
+            "lastTime": "MM:ss"
+          }
+        ]
       }
     },
     mounted(){
@@ -238,7 +356,7 @@
       }
       .add-user {
         right: 10px;
-        font-size:@maxIconFontSize;
+        font-size: @maxIconFontSize;
       }
     }
     .content {
