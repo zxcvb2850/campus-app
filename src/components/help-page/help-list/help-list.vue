@@ -15,7 +15,7 @@
     <v-mask @clickMask="hideMask" :isFilter="isFilter"></v-mask>
     <scroll class="help-wrapper" :data="helps">
       <ul>
-        <li class="help-item" v-for="(help,index) in helps">
+        <li class="help-item" @click="helpDetails(help)" v-for="(help,index) in helps">
           <div class="center">
             <div class="user-icon"><img :src="help.userIcon" alt=""></div>
             <div class="demand">
@@ -127,7 +127,12 @@
       },
       helpType(type){
         return transformType(type);
-      }
+      },
+      helpDetails(item){
+        this.$router.push({
+          path: `/helpPage/helpList/${item.id}`
+        });
+      },
     },
     components: {
       Scroll,

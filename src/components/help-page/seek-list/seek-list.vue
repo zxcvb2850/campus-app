@@ -51,8 +51,6 @@
 <script>
   import Scroll from "base/scroll/scroll"
   import VMask from "base/mask/mask"
-  import Login from "base/login/login"
-  import loginPage from "components/login-page/login-page"
 
   export default {
     data(){
@@ -62,9 +60,6 @@
       }
     },
     methods: {
-      clickLogin(){
-        this.setLoginPage(true)
-      },
       release(){
         this.$router.push("seekList/release")
       },
@@ -72,8 +67,6 @@
     components: {
       Scroll,
       VMask,
-      Login,
-      loginPage
     }
   }
 </script>

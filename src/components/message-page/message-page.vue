@@ -81,8 +81,6 @@
   import VHeader from "base/header/header"
   import BScroll from "better-scroll"
   import Scroll from "base/scroll/scroll"
-  import Login from "base/login/login"
-  import LoginPage from "components/login-page/login-page"
   import ContactList from "components/contact-list/contact-list"
 
   const ERR_OR = 0;
@@ -255,15 +253,10 @@
       addUser(){
         console.log(2)
       },
-      clickLogin(){
-        this.setLoginPage(true);
-      }
     },
     components: {
       VHeader,
       Scroll,
-      Login,
-      LoginPage,
       ContactList
     }
   }

@@ -1,11 +1,11 @@
 <template>
-  <div class="my-page">
+  <div class="my-page" ref="myPage">
     <div class="my-wrapper">
       <div class="header" ref="header">
         <div class="back" ref="back">
           <i class="icon icon-xue"></i>
           <h2 class="title" v-show="showTitle" ref="title">我的详情</h2>
-          <i class="icon icon-setup"></i>
+          <router-link to="/system" class="icon icon-setup" tag="i"></router-link>
         </div>
         <div class="filter" :style="bgStyle"></div>
         <div class="user-info">
@@ -41,25 +41,42 @@
             <li class="nav-item"><i class="icon icon-yinxiang"></i><span>印象</span></li>
             <li class="nav-item"><i class="icon icon-fankui"></i><span>反馈</span></li>
           </ul>
-          <div class="user-dynamic">
-            <div class="dynamic-nav">
-              <router-link to="dynamic" class="nav-item">我的动态
-              </router-link>
-              <router-link to="schedule" class="nav-item">课程表
-              </router-link>
-            </div>
+          <div class="my-nav">
+            <a href="javascript:void(0)" class="nav-item" @click="currentClick(0)"
+               :class="{'active':currentIndex === 0}">附近</a>
+            <a href="javascript:void(0)" class="nav-item" @click="currentClick(1)"
+               :class="{'active':currentIndex === 1}">消息</a>
           </div>
-          <div class="content" ref="content">
-            <router-view></router-view>
+          <div class="content" ref="contentWrapper">
+            <div class="content-wrapper" ref="wrapper">
+              <div class="item">
+                <ul class="item-wrapper">
+                  <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
+                  <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
+                  <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
+                  <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
+                  <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
+                  <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
+                  <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
+                  <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
+                  <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
+                </ul>
+              </div>
+              <div class="item">
+                <ul class="item-wrapper">
+                  <li class="record-item"></li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </scroll>
     </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import {mapGetters, mapMutations} from 'vuex'
   import BScroll from 'better-scroll'
   import Scroll from 'base/scroll/scroll'
 
@@ -89,6 +106,17 @@
       this.listenScroll = true;
     },
     mounted(){
+      this.$nextTick(() => {
+        this._initSliderWidth();
+        this._initSlider();
+      })
+      window.addEventListener('resize', () => {
+        if (!this.contentWrapper) {
+          return;
+        }
+        this._initSliderWidth();
+        this.contentWrapper.refresh();
+      })
       this.headerHeight = this.$refs.header.clientHeight;
       this.minTranslateY = -this.headerHeight + HEAD_HEIGHT;
       if (this.headerHeight > 300) {
@@ -104,11 +132,48 @@
       clickLogin(){
         this.setLoginPage(true)
       },
-      ...mapMutations({
-        setLoginPage: "SET_LOGINPAGE"
-      })
+      currentClick(index){
+        if (this.currentIndex === index) {
+          return;
+        }
+        this.currentIndex = index;
+        this.contentWrapper.goToPage(this.currentIndex, 0);
+      },
+      _initSliderWidth(){
+        this.children = this.$refs.wrapper.children;
+
+        let width = 0;
+        let contentWidth = this.$refs.contentWrapper.clientWidth;
+        for (let i = 0; i < this.children.length; i++) {
+          let child = this.children[i];
+          child.style.width = contentWidth + 'px';
+          width += contentWidth;
+        }
+
+        this.$refs.wrapper.style.width = width + 'px';
+
+      },
+      _initSlider(){
+        this.contentWrapper = new BScroll(this.$refs.contentWrapper, {
+          scrollX: true,
+          scrollY: false,
+          momentum: false,
+          snap: true,
+          snapLoop: false,
+          bounce: false,
+          click: true
+        })
+
+        this.contentWrapper.on('scrollEnd', () => {
+          let pageIndex = this.contentWrapper.getCurrentPage().pageX;
+          this.currentIndex = pageIndex;
+        })
+      },
     },
     watch: {
+      system(){
+        console.log(1)
+      },
       scrollY(newY){
         let translateY = Math.max(this.minTranslateY, newY);
         let zIndex = 0;
@@ -303,6 +368,49 @@
           }
           &:nth-child(odd) i {
             color: @iconColorOdd;
+          }
+        }
+      }
+      .my-nav {
+        position: absolute;
+        display: flex;
+        height: 40px;
+        line-height: 40px;
+        .border-1px(@divisionLine);
+        .nav-item {
+          display: block;
+          flex: 1;
+          text-align: center;
+          text-decoration: none;
+          font-size: @mainFontSize;
+          color: @mainTextColor;
+          &.active {
+            color: @mainBackground;
+          }
+        }
+      }
+      .content {
+        position: relative;
+        top: 0;
+        bottom: @headerHeight;
+        left: 0;
+        right: 0;
+        height: 100%;
+        overflow: hidden;
+        height: 1500px;
+        clear: both;
+        .content-wrapper {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          height: 100%;
+          .item {
+            position: absolute;
+            float: left;
+            height: 100%;
+            img {
+              width: 100%;
+            }
           }
         }
       }
