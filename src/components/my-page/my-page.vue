@@ -1,6 +1,6 @@
 <template>
   <div class="my-page">
-    <div class="my-wrapper" v-show="isLogin">
+    <div class="my-wrapper">
       <div class="header" ref="header">
         <div class="back" ref="back">
           <i class="icon icon-xue"></i>
@@ -10,7 +10,9 @@
         <div class="filter" :style="bgStyle"></div>
         <div class="user-info">
           <div class="user-data">
-            <div class="icon-wrapper"><img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=403143490,1710226245&fm=117&gp=0.jpg" alt=""></div>
+            <div class="icon-wrapper"><img
+              src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=403143490,1710226245&fm=117&gp=0.jpg"
+              alt=""></div>
             <ul class="data">
               <li>
                 <p>段位</p>
@@ -57,8 +59,6 @@
 </template>
 
 <script>
-  import Login from 'base/login/login'
-  import LoginPage from 'components/login-page/login-page'
   import {mapGetters, mapMutations} from 'vuex'
   import BScroll from 'better-scroll'
   import Scroll from 'base/scroll/scroll'
@@ -83,21 +83,19 @@
       bgStyle(){
         return `background-image:url("http://img2.imgtn.bdimg.com/it/u=257099789,2726639331&fm=26&gp=0.jpg")`
       },
-      ...mapGetters([
-        'isLogin'
-      ])
     },
     created(){
       this.probeType = 3;
       this.listenScroll = true;
     },
     mounted(){
-      if (!this.isLogin) {
-        this.$router.push('/loginPage');
-      }
       this.headerHeight = this.$refs.header.clientHeight;
       this.minTranslateY = -this.headerHeight + HEAD_HEIGHT;
-      this.$refs.nav.$el.style.top = `${this.headerHeight - 0.5}px`;
+      if (this.headerHeight > 300) {
+        this.$refs.nav.$el.style.top = '300px';
+      } else {
+        this.$refs.nav.$el.style.top = `${this.headerHeight - 0.5}px`;
+      }
     },
     methods: {
       scroll(pos){
@@ -125,18 +123,30 @@
         this.$refs.layer.style['transform'] = `translate3d(0,${translateY}px,0)`;
         this.$refs.layer.style['webkitTransform'] = `translate3d(0,${translateY}px,0)`;
 
-        if (newY < this.minTranslateY) {
-          zIndex = 10
-          this.$refs.header.style.paddingTop = 0
-          this.$refs.header.style.height = `${HEAD_HEIGHT}px`
+        if (this.headerHeight > 300) {
+          if (newY < this.minTranslateY) {
+            zIndex = 10
+            this.$refs.header.style.paddingTop = 0
+            this.$refs.header.style.height = `${HEAD_HEIGHT}px`
+          } else {
+            this.$refs.header.style.paddingTop = '300px'
+            this.$refs.header.style.height = 0
+          }
         } else {
-          this.$refs.header.style.paddingTop = '70%'
-          this.$refs.header.style.height = 0
+          if (newY < this.minTranslateY) {
+            zIndex = 10
+            this.$refs.header.style.paddingTop = 0
+            this.$refs.header.style.height = `${HEAD_HEIGHT}px`
+          } else {
+            this.$refs.header.style.paddingTop = '70%'
+            this.$refs.header.style.height = 0
+          }
         }
 
         const percent = Math.abs(newY / this.headerHeight);
         if (newY > 0) {
           scale = 1 + percent;
+          zIndex = 10
         }
         this.$refs.header.style['transform'] = `scale(${scale})`;
         this.$refs.header.style['webkitTransform'] = `scale(${scale})`;
@@ -144,8 +154,6 @@
       }
     },
     components: {
-      Login,
-      LoginPage,
       Scroll
     }
   }
@@ -211,6 +219,7 @@
           filter: blur(2px);
           transform-origin: top;
           background-size: cover;
+          max-height: 300px;
         }
         .user-info {
           position: absolute;

@@ -37,8 +37,30 @@
                 <li class="record-item">
                   <div class="icon"><img src="../../assets/logo.png" alt=""></div>
                   <div class="info">
-                    <h3 class="alias">xxxx</h3>
-                    <p class="last-record">xxxxx</p>
+                    <h3 class="alias">风的飘扬</h3>
+                    <p class="last-record">哈哈哈</p>
+                  </div>
+                  <div class="num-time">
+                    <p class="num">2</p>
+                    <p class="time">MM:ss</p>
+                  </div>
+                </li>
+                <li class="record-item">
+                  <div class="icon"><img src="../../assets/logo.png" alt=""></div>
+                  <div class="info">
+                    <h3 class="alias">风的飘扬</h3>
+                    <p class="last-record">哈哈哈</p>
+                  </div>
+                  <div class="num-time">
+                    <p class="num">2</p>
+                    <p class="time">MM:ss</p>
+                  </div>
+                </li>
+                <li class="record-item">
+                  <div class="icon"><img src="../../assets/logo.png" alt=""></div>
+                  <div class="info">
+                    <h3 class="alias">风的飘扬</h3>
+                    <p class="last-record">哈哈哈</p>
                   </div>
                   <div class="num-time">
                     <p class="num">2</p>
@@ -62,7 +84,6 @@
   import Login from "base/login/login"
   import LoginPage from "components/login-page/login-page"
   import ContactList from "components/contact-list/contact-list"
-  import {mapGetters, mapMutations} from "vuex"
 
   const ERR_OR = 0;
 
@@ -76,112 +97,50 @@
         chats: [
           {
             "userIcon": "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2635650233,2495906790&fm=117&gp=0.jpg",
-            "alias": "xxxx",
-            "lastRecord": "最后一句话",
+            "alias": "懒得打字",
+            "lastRecord": "我也没什么想说的",
             "num": 3,
             "lastTime": "MM:ss"
           },
           {
             "userIcon": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2003988139,3010807873&fm=117&gp=0.jpg",
-            "alias": "xxxx",
-            "lastRecord": "最后一句话",
+            "alias": "随风",
+            "lastRecord": "。。。",
             "num": 0,
             "lastTime": "MM:ss"
           },
           {
             "userIcon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2600862994,2565094368&fm=117&gp=0.jpg",
-            "alias": "xxxx",
-            "lastRecord": "最后一句话",
+            "alias": "王大爷",
+            "lastRecord": "快点，三缺一",
             "num": 4,
             "lastTime": "MM:ss"
           },
           {
             "userIcon": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2056064112,1057705139&fm=117&gp=0.jpg",
-            "alias": "xxxx",
-            "lastRecord": "最后一句话",
+            "alias": "MM",
+            "lastRecord": "哦哈哈哈",
             "num": 0,
             "lastTime": "MM:ss"
           },
           {
             "userIcon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1486163287,1300629863&fm=117&gp=0.jpg",
-            "alias": "xxxx",
-            "lastRecord": "最后一句话",
+            "alias": "傻妞",
+            "lastRecord": "嗯",
             "num": 0,
             "lastTime": "MM:ss"
           },
           {
             "userIcon": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3551563550,2594280103&fm=117&gp=0.jpg",
-            "alias": "xxxx",
-            "lastRecord": "最后一句话",
+            "alias": "乌拉拉",
+            "lastRecord": "哈哈哈哈",
             "num": 0,
             "lastTime": "MM:ss"
           },
           {
             "userIcon": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2286837302,1397695233&fm=117&gp=0.jpg",
-            "alias": "xxxx",
-            "lastRecord": "最后一句话",
-            "lastTime": "MM:ss"
-          },
-          {
-            "userIcon": "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2635650233,2495906790&fm=117&gp=0.jpg",
-            "alias": "xxxx",
-            "lastRecord": "最后一句话",
-            "lastTime": "MM:ss"
-          },
-          {
-            "userIcon": "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=620493834,170036947&fm=117&gp=0.jpg",
-            "alias": "xxxx",
-            "lastRecord": "最后一句话",
-            "num": 3,
-            "lastTime": "MM:ss"
-          },
-
-          {
-            "userIcon": "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2635650233,2495906790&fm=117&gp=0.jpg",
-            "alias": "xxxx",
-            "lastRecord": "最后一句话",
-            "num": 3,
-            "lastTime": "MM:ss"
-          },
-          {
-            "userIcon": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2003988139,3010807873&fm=117&gp=0.jpg",
-            "alias": "xxxx",
-            "lastRecord": "最后一句话",
-            "num": 0,
-            "lastTime": "MM:ss"
-          },
-          {
-            "userIcon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2600862994,2565094368&fm=117&gp=0.jpg",
-            "alias": "xxxx",
-            "lastRecord": "最后一句话",
-            "num": 4,
-            "lastTime": "MM:ss"
-          },
-          {
-            "userIcon": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2056064112,1057705139&fm=117&gp=0.jpg",
-            "alias": "xxxx",
-            "lastRecord": "最后一句话",
-            "num": 0,
-            "lastTime": "MM:ss"
-          },
-          {
-            "userIcon": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1486163287,1300629863&fm=117&gp=0.jpg",
-            "alias": "xxxx",
-            "lastRecord": "最后一句话",
-            "num": 0,
-            "lastTime": "MM:ss"
-          },
-          {
-            "userIcon": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3551563550,2594280103&fm=117&gp=0.jpg",
-            "alias": "xxxx",
-            "lastRecord": "最后一句话",
-            "num": 0,
-            "lastTime": "MM:ss"
-          },
-          {
-            "userIcon": "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2286837302,1397695233&fm=117&gp=0.jpg",
-            "alias": "xxxx",
-            "lastRecord": "最后一句话",
+            "alias": "好的",
+            "lastRecord": "记得帮我带吃的",
             "lastTime": "MM:ss"
           },
           {
@@ -201,9 +160,6 @@
       }
     },
     mounted(){
-      if (!this.isLogin) {
-        this.$router.push('/loginPage');
-      }
       this.$nextTick(() => {
         this._initSliderWidth();
         this._initSlider();
@@ -301,15 +257,7 @@
       },
       clickLogin(){
         this.setLoginPage(true);
-      },
-      ...mapMutations({
-        setLoginPage: "SET_LOGINPAGE"
-      })
-    },
-    computed: {
-      ...mapGetters([
-        'isLogin'
-      ])
+      }
     },
     components: {
       VHeader,
@@ -327,8 +275,8 @@
   .news-page {
     .nav {
       display: flex;
-      height: @tabHeight/2;
-      line-height: @tabHeight/2;
+      height: 40px;
+      line-height: 40px;
       .border-1px(@divisionLine);
       .nav-item {
         display: block;
@@ -352,6 +300,7 @@
         color: #fff;
       }
       .contacts {
+        font-size: @titleFontSize;
         left: 10px;
       }
       .add-user {
@@ -361,7 +310,7 @@
     }
     .content {
       position: absolute;
-      top: @headerHeight + @tabHeight/2;
+      top: @headerHeight + 40;
       bottom: @headerHeight;
       left: 0;
       right: 0;
@@ -386,7 +335,7 @@
       .record-item {
         display: flex;
         padding: 10px;
-        height: 40px;
+        height: 44px;
         .border-1px(@divisionLine);
         .icon {
           margin: 0 6px;
@@ -406,8 +355,12 @@
           min-width: 1px;
           .alias {
             font-size: @titleFontSize;
+            font-weight: 500;
           }
           .last-record {
+            height: 20px;
+            line-height: 20px;
+            font-size: @mainFontSize;
             .no-wrap;
           }
         }
@@ -424,7 +377,7 @@
             text-align: center;
             font-weight: bold;
             border-radius: 50%;
-            background-color: @priceColor;
+            background-color: rgba(255, 0, 0, .8);
             color: @tabBackground;
           }
           .time {

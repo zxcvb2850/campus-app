@@ -1,23 +1,22 @@
 <template>
   <div class="seek-list">
     <div class="filter-part">
-      <p class="filter" v-show="isLogin" @click="release">发布</p>
+      <p class="filter">发布</p>
     </div>
-    <router-view></router-view>
-    <div class="seek-add" v-show="!seekList.length && isLogin">
+    <div class="seek-add" v-show="!seekList.length">
       <div class="seek-add-wrapper">
         <div class="seek-add-btn" @click="release">+</div>
         <p class="desc">你还没有发不过求助，快来发布吧</p>
       </div>
     </div>
-    <scroll class="help-wrapper" v-show="seekList.length>0 && isLogin">
+    <scroll class="help-wrapper" v-show="seekList.length>0">
       <ul>
         <li class="help-item">
           <div class="center">
             <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
             <div class="demand">
               <h3 class="title">取快递</h3>
-              <p class="address">地址：<span>xxxxx</span></p>
+              <p class="address">地址：<span>东十C335</span></p>
               <p class="desc">简述：<span>无</span></p>
               <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
             </div>
@@ -33,8 +32,8 @@
             <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
             <div class="demand">
               <h3 class="title">取快递</h3>
-              <p class="address">地址：<span>xxxxx</span></p>
-              <p class="desc">简述：<span>无</span></p>
+              <p class="address">地址：<span>东六223</span></p>
+              <p class="desc">简述：<span>帮我送到寝室</span></p>
               <p class="complete icon icon-iconcompleted" v-show="!isComplete"></p>
             </div>
             <div class="price"><span>3</span>￥</div>
@@ -54,7 +53,6 @@
   import VMask from "base/mask/mask"
   import Login from "base/login/login"
   import loginPage from "components/login-page/login-page"
-  import {mapGetters, mapMutations} from 'vuex'
 
   export default {
     data(){
@@ -70,14 +68,6 @@
       release(){
         this.$router.push("seekList/release")
       },
-      ...mapMutations({
-        setLoginPage: "SET_LOGINPAGE"
-      })
-    },
-    computed: {
-      ...mapGetters([
-        'isLogin'
-      ])
     },
     components: {
       Scroll,
