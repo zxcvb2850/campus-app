@@ -11,7 +11,7 @@
         <router-link to="/myInfo" class="user-info" tag="div">
           <div class="user-data">
             <div class="icon-wrapper"><img
-              src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=403143490,1710226245&fm=117&gp=0.jpg"
+              src="../../assets/icon-10.png"
               alt=""></div>
             <ul class="data">
               <li>
@@ -42,9 +42,9 @@
             <li class="nav-item"><i class="icon icon-fankui"></i><span>反馈</span></li>
           </ul>
           <div class="my-nav">
-            <a href="javascript:void(0)" class="nav-item" @click.stop="currentClick(0)"
+            <a href="javascript:void(0)" class="nav-item" @click="currentClick(0)"
                :class="{'active':currentIndex === 0}">我的动态</a>
-            <a href="javascript:void(0)" class="nav-item" @click.stop="currentClick(1)"
+            <a href="javascript:void(0)" class="nav-item" @click="currentClick(1)"
                :class="{'active':currentIndex === 1}">课程表</a>
           </div>
           <div class="content" ref="contentWrapper">
@@ -52,7 +52,8 @@
               <div class="item">
                 <ul class="item-wrapper">
                   <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
-                  <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
+                  <li class="record-item"><img src="../../assets/3.jpg" alt=""></li>
+                  <li class="record-item"><img src="../../assets/2.jpg" alt=""></li>
                 </ul>
               </div>
               <div class="item">
@@ -94,7 +95,7 @@
     },
     computed: {
       bgStyle(){
-        return `background-image:url("http://img2.imgtn.bdimg.com/it/u=257099789,2726639331&fm=26&gp=0.jpg")`
+        return `background-image:url(${require('../../assets/head.jpg')})`
       },
     },
     created(){
@@ -335,6 +336,7 @@
           padding-left: 10px;
           width: 80%;
           .no-wrap;
+          color: #000;
         }
       }
       .bg-layer {

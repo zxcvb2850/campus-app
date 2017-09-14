@@ -7,7 +7,6 @@ import myPage from 'components/my-page/my-page'
 import helpList from 'components/help-page/help-list/help-list'
 import helpDetails from 'components/help-page/help-list/help-details/help-details'
 import seekList from 'components/help-page/seek-list/seek-list'
-import release from 'components/help-page/seek-list/release/release'
 import System from 'components/system/system'
 import myInfo from 'components/my-info/my-info'
 
