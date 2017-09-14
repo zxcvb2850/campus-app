@@ -40,6 +40,7 @@
 </template>
 
 <script>
+  import {mapGetters, mapMutations} from "vuex"
   import Scroll from "base/scroll/scroll"
   import VMask from "base/mask/mask"
   import {transformType} from "common/js/transform"
@@ -50,32 +51,32 @@
         isFilter: false,
         helps: [
           {
-            id: 1,                     //唯一标示
-            userIcon: "http://scimg.jb51.net/touxiang/201704/2017041921224424.jpg",
+            id: 1973574,                     //唯一标示
+            userIcon: require('../../../assets/icon-1.jpg'),
             type: 1,                    //单子类型1为快递
             address: "武汉职业技术学院东十A",     //地址
             desc: "无",                //简述
             complete: true,           //次单子是否已完成
             price: 3,
             sex: 2,                   //性别1为男，2为女
-            username: "网名",         //发布者的网名
+            username: "醉雨非烟",         //发布者的网名
             releaseTime: "7月7日"     //发布时间
           },
           {
-            id: 2,                     //唯一标示
-            userIcon: "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2003988139,3010807873&fm=117&gp=0.jpg",
+            id: 45784535,                     //唯一标示
+            userIcon: require('../../../assets/icon-2.jpg'),
             type: 2,                    //单子类型1为快递
             address: "武汉职业技术学院东十B",     //地址
             desc: "挑选一下，谢谢",                //简述
             complete: false,           //次单子是否已完成
             price: 3,
             sex: 1,                   //性别1为男，2为女
-            username: "网名",         //发布者的网名
+            username: "像早晨一样清白",         //发布者的网名
             releaseTime: "7月6日"     //发布时间
           },
           {
-            id: 3,
-            userIcon: "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2600862994,2565094368&fm=117&gp=0.jpg",
+            id: 72578541,
+            userIcon: require('../../../assets/icon-3.jpg'),
             type: 3,
             address: "武汉职业技术学院东六",
             desc: "不要辣，不要辣，不要辣",
@@ -86,27 +87,27 @@
             releaseTime: "7月5日"
           },
           {
-            id: 4,
-            userIcon: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2056064112,1057705139&fm=117&gp=0.jpg",
+            id: 18635484,
+            userIcon: require('../../../assets/icon-4.jpg'),
             type: 4,
             address: "武汉职业技术学院东五",
             desc: "我要美美哒",
             complete: true,
             price: 3,
             sex: 1,
-            username: "网名",
+            username: "期待丶下一季",
             releaseTime: "7月4日"
           },
           {
-            id: 5,
-            userIcon: "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1486163287,1300629863&fm=117&gp=0.jpg",
+            id: 15815348,
+            userIcon: require('../../../assets/icon-5.jpg'),
             type: 5,
             address: "武汉职业技术学院东一",
             desc: "来组队啊",
             complete: true,
             price: 3,
             sex: 1,
-            username: "网名",
+            username: "淡淡の、花香",
             releaseTime: "7月3日"
           }
         ]
@@ -129,16 +130,20 @@
         return transformType(type);
       },
       helpDetails(item){
+        this.setDetail(item);
         this.$router.push({
           path: `/helpPage/helpList/${item.id}`
         });
       },
+      ...mapMutations({
+        setDetail: 'SET_DETAIL'
+      })
     },
     components: {
       Scroll,
       VMask
     }
-  }
+  };
 </script>
 
 <style lang="less" scoped>
@@ -152,7 +157,7 @@
       right: 20px;
       .filter {
         position: absolute;
-        top: -50px;
+        top: -@tabHeight;
         bottom: 0;
         right: 0;
         font-size: @titleFontSize;

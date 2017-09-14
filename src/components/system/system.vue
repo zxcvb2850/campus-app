@@ -7,7 +7,7 @@
       </div>
       <div class="system-wrapper">
         <ul>
-          <li class="item">
+          <li class="item" @click="myInfo">
             <p class="title">个人信息</p>
             <p class="icon">&gt;</p>
           </li>
@@ -53,6 +53,9 @@
     methods: {
       back(){
         this.$router.push("/myPage");
+      },
+      myInfo(){
+        this.$router.replace("/myInfo")
       }
     },
     components: {

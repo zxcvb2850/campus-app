@@ -9,60 +9,86 @@
         <p class="desc">你还没有发不过求助，快来发布吧</p>
       </div>
     </div>
-    <scroll class="help-wrapper" v-show="seekList.length>0">
+    <scroll class="seek-wrapper" v-show="seekList.length>0">
       <ul>
-        <li class="help-item">
+        <li class="seek-item" @click="seekDetails(item)" v-for="(item,index) in seekList">
           <div class="center">
-            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
+            <div class="user-icon"><img :src="item.userIcon" alt=""></div>
             <div class="demand">
-              <h3 class="title">取快递</h3>
-              <p class="address">地址：<span>东十C335</span></p>
-              <p class="desc">简述：<span>无</span></p>
-              <p class="complete icon icon-iconcompleted" v-show="isComplete"></p>
+              <h3 class="title" v-html="helpType(item.type)"></h3>
+              <p class="address">{{item.address}}</p>
+              <p class="desc">简述：<span>{{item.desc}}</span></p>
+              <p class="complete icon icon-iconcompleted" v-show="item.complete"></p>
             </div>
-            <div class="price"><span>3</span>￥</div>
+            <div class="price"><span>{{item.price}}</span>￥</div>
           </div>
-          <div class="footer">
-            <div class="sex"><span class="icon icon-girl"></span>网名</div>
-            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
-          </div>
-        </li>
-        <li class="help-item">
-          <div class="center">
-            <div class="user-icon"><img src="../../../assets/logo.png" alt=""></div>
-            <div class="demand">
-              <h3 class="title">取快递</h3>
-              <p class="address">地址：<span>东六223</span></p>
-              <p class="desc">简述：<span>帮我送到寝室</span></p>
-              <p class="complete icon icon-iconcompleted" v-show="!isComplete"></p>
+          <footer class="footer">
+            <div class="sex"><span class="icon"
+                                   :class="item.sex === 1?'icon-boy':'icon-girl'"></span><span>{{item.username}}</span>
             </div>
-            <div class="price"><span>3</span>￥</div>
-          </div>
-          <div class="footer">
-            <div class="sex"><span class="icon icon-boy"></span>网名</div>
-            <div class="time">发布时间:<span>MM-dd HH:MM</span></div>
-          </div>
+            <div class="time">发布时间:<span>{{item.releaseTime}}</span></div>
+          </footer>
         </li>
       </ul>
     </scroll>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+  import {mapMutations} from "vuex"
   import Scroll from "base/scroll/scroll"
   import VMask from "base/mask/mask"
+  import {transformType} from "common/js/transform"
 
   export default {
     data(){
       return {
-        seekList: [1],
-        isComplete: true
+        isComplete: true,
+        seekList: [
+          {
+            id: 1973574,                     //唯一标示
+            userIcon: require('../../../assets/icon-6.jpg'),
+            type: 1,                    //单子类型1为快递
+            address: "武汉职业技术学院东十A",     //地址
+            desc: "无",                //简述
+            complete: true,           //次单子是否已完成
+            price: 3,
+            sex: 2,                   //性别1为男，2为女
+            username: "顾你安稳",         //发布者的网名
+            releaseTime: "7月7日"     //发布时间
+          },
+          {
+            id: 45784535,                     //唯一标示
+            userIcon: require('../../../assets/icon-7.jpg'),
+            type: 2,                    //单子类型1为快递
+            address: "武汉职业技术学院东十B",     //地址
+            desc: "挑选一下，谢谢",                //简述
+            complete: false,           //次单子是否已完成
+            price: 3,
+            sex: 1,                   //性别1为男，2为女
+            username: "回忆，停留。",         //发布者的网名
+            releaseTime: "7月6日"     //发布时间
+          }
+        ]
       }
     },
     methods: {
       release(){
         this.$router.push("seekList/release")
       },
+      helpType(type){
+        return transformType(type);
+      },
+      seekDetails(item){
+        this.setDetail(item);
+        this.$router.push({
+          path: `/helpPage/seekList/${item.id}`
+        });
+      },
+      ...mapMutations({
+        setDetail: 'SET_DETAIL'
+      })
     },
     components: {
       Scroll,
@@ -82,7 +108,7 @@
       right: 20px;
       .filter {
         position: absolute;
-        top: -50px;
+        top: -@tabHeight;
         right: 0;
         font-size: @titleFontSize;
         font-weight: normal;
@@ -146,10 +172,10 @@
         font-size: @mainFontSize;
       }
     }
-    .help-wrapper {
+    .seek-wrapper {
       height: 100%;
       overflow: hidden;
-      .help-item {
+      .seek-item {
         padding: 10px;
         .border-1px(@divisionLine);
         .box-sizing;
@@ -163,10 +189,10 @@
           box-sizing: border-box
         }
         .user-icon {
-          flex: 0 0 100px;
+          flex: 0 0 60px;
           margin-right: 20px;
-          width: 100px;
-          height: 100px;
+          width: 60px;
+          height: 60px;
           border-radius: 50%;
           overflow: hidden;
           img {
@@ -180,13 +206,14 @@
           flex-direction: column;
           justify-content: center;
           line-height: 20px;
+          min-width: 1px;
           .title {
             font-size: @itemTitleFontSize;
             color: @importantColor;
           }
           .address {
             font-size: @titleFontSize;
-            .no-wrap();
+            .no-wrap;
           }
           .desc {
             font-size: @mainFontSize;
@@ -214,14 +241,11 @@
           .sex {
             flex: 1;
             text-align: left;
-            .icon {
-              padding-right: 10px;
-              &.icon-girl {
-                color: #dc4883;
-              }
-              &.icon-boy {
-                color: #487ef8;
-              }
+            .icon-girl {
+              color: #dc4883;
+            }
+            .icon-boy {
+              color: #487ef8;
             }
           }
           .time {

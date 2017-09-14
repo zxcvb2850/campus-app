@@ -8,7 +8,7 @@
           <router-link to="/system" class="icon icon-setup" tag="i"></router-link>
         </div>
         <div class="filter" :style="bgStyle"></div>
-        <div class="user-info">
+        <router-link to="/myInfo" class="user-info" tag="div">
           <div class="user-data">
             <div class="icon-wrapper"><img
               src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=403143490,1710226245&fm=117&gp=0.jpg"
@@ -28,9 +28,9 @@
               </li>
             </ul>
           </div>
-          <h1 class="username">username</h1>
+          <h1 class="username">海棠花的美</h1>
           <p class="autograph">我是来自南方的一匹狼</p>
-        </div>
+        </router-link>
       </div>
       <div class="bg-layer" ref="layer"></div>
       <scroll :probe-type="probeType" :listen-scroll="listenScroll" @scroll="scroll" class="nav" ref="nav">
@@ -42,10 +42,10 @@
             <li class="nav-item"><i class="icon icon-fankui"></i><span>反馈</span></li>
           </ul>
           <div class="my-nav">
-            <a href="javascript:void(0)" class="nav-item" @click="currentClick(0)"
-               :class="{'active':currentIndex === 0}">附近</a>
-            <a href="javascript:void(0)" class="nav-item" @click="currentClick(1)"
-               :class="{'active':currentIndex === 1}">消息</a>
+            <a href="javascript:void(0)" class="nav-item" @click.stop="currentClick(0)"
+               :class="{'active':currentIndex === 0}">我的动态</a>
+            <a href="javascript:void(0)" class="nav-item" @click.stop="currentClick(1)"
+               :class="{'active':currentIndex === 1}">课程表</a>
           </div>
           <div class="content" ref="contentWrapper">
             <div class="content-wrapper" ref="wrapper">
@@ -53,18 +53,12 @@
                 <ul class="item-wrapper">
                   <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
                   <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
-                  <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
-                  <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
-                  <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
-                  <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
-                  <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
-                  <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
-                  <li class="record-item"><img src="../../assets/1.jpg" alt=""></li>
                 </ul>
               </div>
               <div class="item">
+                <h2 class="title">我的课程表</h2>
                 <ul class="item-wrapper">
-                  <li class="record-item"></li>
+                  <li class="record-item"><img src="../../assets/schedule.jpg" alt=""></li>
                 </ul>
               </div>
             </div>
@@ -104,6 +98,13 @@
     created(){
       this.probeType = 3;
       this.listenScroll = true;
+      setTimeout(() => {
+        let height = this.$refs.wrapper.clientHeight;
+        this.$refs.contentWrapper.style.height = `${height}px`;
+        this.$refs.nav.refresh();
+        this._initSliderWidth();
+        this.contentWrapper.refresh();
+      }, 100)
     },
     mounted(){
       this.$nextTick(() => {
@@ -171,9 +172,6 @@
       },
     },
     watch: {
-      system(){
-        console.log(1)
-      },
       scrollY(newY){
         let translateY = Math.max(this.minTranslateY, newY);
         let zIndex = 0;
@@ -391,23 +389,17 @@
       }
       .content {
         position: relative;
-        top: 0;
-        bottom: @headerHeight;
-        left: 0;
-        right: 0;
-        height: 100%;
         overflow: hidden;
-        height: 1500px;
-        clear: both;
         .content-wrapper {
           position: absolute;
-          top: 0;
-          bottom: 0;
-          height: 100%;
           .item {
-            position: absolute;
+            //position: absolute;
             float: left;
             height: 100%;
+            .title {
+              padding: 20px 0;
+              text-align: center;
+            }
             img {
               width: 100%;
             }

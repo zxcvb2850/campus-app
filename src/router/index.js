@@ -9,6 +9,7 @@ import helpDetails from 'components/help-page/help-list/help-details/help-detail
 import seekList from 'components/help-page/seek-list/seek-list'
 import release from 'components/help-page/seek-list/release/release'
 import System from 'components/system/system'
+import myInfo from 'components/my-info/my-info'
 
 
 Vue.use(Router)
@@ -45,8 +46,8 @@ export default new Router({
           component: seekList,
           children: [
             {
-              path: 'release',
-              component: release
+              path: ':id',
+              component: helpDetails
             }
           ]
         }
@@ -71,6 +72,11 @@ export default new Router({
       path: '/system',
       name: 'system',
       component: System
+    },
+    {
+      path: '/myInfo',
+      name: '我的信息',
+      component: myInfo
     }
   ],
   linkActiveClass: "active"
