@@ -9,8 +9,8 @@
            :class="{'active':currentIndex === 1}">消息</a>
       </div>
       <div class="filter-part">
-        <p class="contacts" @click="contact">联系人</p>
-        <p class="add-user" @click="addUser">+</p>
+        <p class="contacts">联系人</p>
+        <p class="add-user">+</p>
       </div>
       <div class="content" ref="contentWrapper">
         <div class="content-wrapper" ref="wrapper">
@@ -72,7 +72,6 @@
           </div>
         </div>
       </div>
-      <contact-list :contacts="contacts" v-show="isShow" @contactBack="contactBack"></contact-list>
     </div>
   </div>
 </template>
@@ -81,7 +80,6 @@
   import VHeader from "base/header/header"
   import BScroll from "better-scroll"
   import Scroll from "base/scroll/scroll"
-  import ContactList from "components/contact-list/contact-list"
 
   const ERR_OR = 0;
 
@@ -210,54 +208,11 @@
         }
         this.currentIndex = index;
         this.contentWrapper.goToPage(this.currentIndex, 0);
-      },
-      contact(){
-        this.$http.get("/api/data").then((res) => {
-          res = res.data;
-          if (res.error === ERR_OR) {
-            this.isShow = !this.isShow
-            this.contacts = this._normalizeSinger(res.data.list);
-          }
-        }).catch((err) => {
-          console.log(err)
-        })
-      },
-      _normalizeSinger(list){
-        let map = {};
-        list.forEach((item) => {
-          const key = item.Findex;
-          if (!map[key]) {
-            map[key] = {
-              title: key,
-              items: []
-            }
-          }
-          map[key].items.push({
-            name: item.Fsinger_name
-          })
-        })
-
-        //为了得到有序列表，我们需要处理map
-        let ret = [];
-        for (let key in map) {
-          let val = map[key];
-          if (val.title.match(/[a-zA-Z]/)) {
-            ret.push(val);
-          }
-        }
-        ret.sort((a, b) => {
-          return a.title.charCodeAt(0) - b.title.charCodeAt(0)
-        })
-        return ret;
-      },
-      addUser(){
-        console.log(2)
-      },
+      }
     },
     components: {
       VHeader,
-      Scroll,
-      ContactList
+      Scroll
     }
   }
 </script>
