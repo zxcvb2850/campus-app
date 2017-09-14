@@ -53,7 +53,7 @@
             id: 1,                     //唯一标示
             userIcon: "http://scimg.jb51.net/touxiang/201704/2017041921224424.jpg",
             type: 1,                    //单子类型1为快递
-            address: "xxxxxxxxxx",     //地址
+            address: "武汉职业技术学院东十A",     //地址
             desc: "无",                //简述
             complete: true,           //次单子是否已完成
             price: 3,
@@ -65,8 +65,8 @@
             id: 2,                     //唯一标示
             userIcon: "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2003988139,3010807873&fm=117&gp=0.jpg",
             type: 2,                    //单子类型1为快递
-            address: "xxxxxxxxxx",     //地址
-            desc: "无",                //简述
+            address: "武汉职业技术学院东十B",     //地址
+            desc: "挑选一下，谢谢",                //简述
             complete: false,           //次单子是否已完成
             price: 3,
             sex: 1,                   //性别1为男，2为女
@@ -77,8 +77,8 @@
             id: 3,
             userIcon: "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2600862994,2565094368&fm=117&gp=0.jpg",
             type: 3,
-            address: "xxxxxxxxxx",
-            desc: "无",
+            address: "武汉职业技术学院东六",
+            desc: "不要辣，不要辣，不要辣",
             complete: false,
             price: 3,
             sex: 1,
@@ -89,9 +89,9 @@
             id: 4,
             userIcon: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2056064112,1057705139&fm=117&gp=0.jpg",
             type: 4,
-            address: "xxxxxxxxxx",
-            desc: "无",
-            complete: false,
+            address: "武汉职业技术学院东五",
+            desc: "我要美美哒",
+            complete: true,
             price: 3,
             sex: 1,
             username: "网名",
@@ -101,9 +101,9 @@
             id: 5,
             userIcon: "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1486163287,1300629863&fm=117&gp=0.jpg",
             type: 5,
-            address: "xxxxxxxxxx",
-            desc: "无",
-            complete: false,
+            address: "武汉职业技术学院东一",
+            desc: "来组队啊",
+            complete: true,
             price: 3,
             sex: 1,
             username: "网名",
@@ -125,14 +125,14 @@
       hideMask(isShow){
         this.isFilter = !isShow;
       },
+      helpType(type){
+        return transformType(type);
+      },
       helpDetails(item){
         this.$router.push({
           path: `/helpPage/helpList/${item.id}`
         });
       },
-      helpType(type){
-        return transformType(type);
-      }
     },
     components: {
       Scroll,
@@ -196,10 +196,10 @@
           box-sizing: border-box
         }
         .user-icon {
-          flex: 0 0 100px;
+          flex: 0 0 60px;
           margin-right: 20px;
-          width: 100px;
-          height: 100px;
+          width: 60px;
+          height: 60px;
           border-radius: 50%;
           overflow: hidden;
           img {

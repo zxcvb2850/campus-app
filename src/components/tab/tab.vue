@@ -1,43 +1,30 @@
 <template>
-  <div class="tab">
+  <footer class="tab">
     <div class="tab-item">
       <router-link to="/helpPage" tag="div">
         <p><span class="icon icon-index"></span>帮助</p>
       </router-link>
     </div>
-    <div class="tab-item" v-if="isLogin">
+    <div class="tab-item">
       <router-link to="/newsPage" tag="div">
         <p><span class="icon icon-message1"></span>消息</p>
       </router-link>
     </div>
     <div class="tab-item">
-      <router-link to="/findPage" tag="div">
-        <p><span class="icon icon-find"></span>发现</p>
-      </router-link>
-    </div>
-    <div class="tab-item" v-if="!isLogin">
-      <router-link to="/loginPage" tag="div">
-        <p><span class="icon icon-my"></span>我的</p>
-      </router-link>
-    </div>
-    <div class="tab-item" v-if="isLogin">
       <router-link to="/myPage" tag="div">
         <p><span class="icon icon-my"></span>我的</p>
       </router-link>
     </div>
-  </div>
+    <div class="tab-item">
+      <router-link to="/findPage" tag="div">
+        <p><span class="icon icon-find"></span>关于</p>
+      </router-link>
+    </div>
+  </footer>
 </template>
 
 <script>
-  import {mapGetters} from "vuex"
-
-  export default {
-    computed: {
-      ...mapGetters([
-        "isLogin"
-      ])
-    }
-  }
+  export default {}
 </script>
 
 <style lang="less" scoped>
@@ -59,13 +46,13 @@
       div {
         display: block;
         text-decoration: none;
-        font-size: @mainFontSize;
+        font-size: @itemTitleFontSize;
         color: @mainTextColor;
         span {
           display: block;
           height: 14px;
           line-height: 40px;
-          font-size: @headerFontSize;
+          font-size: 20px;
         }
         &.active {
           color: @importantColor;

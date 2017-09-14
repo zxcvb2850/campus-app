@@ -1,39 +1,41 @@
 <template>
-  <div class="cont-wrapper">
-    <v-header>联系人</v-header>
-    <div class="back" @click="contactBack">
-      <i class="icon icon-jiantouicon"></i>
-    </div>
-    <scroll @scroll="scroll"
-            :listen-scroll="listenScroll"
-            :probe-type="probeType"
-            :data="contacts"
-            class="listview"
-            ref="listview">
-      <ul>
-        <li v-for="items in contacts" class="list-group" ref="listGroup">
-          <h2 class="list-group-title">{{items.title}}</h2>
-          <uL>
-            <li @click="selectItem(item)" v-for="item in items.items" class="list-group-item">
-              <span class="name">{{item.name}}</span>
-            </li>
-          </uL>
-        </li>
-      </ul>
-      <div class="list-shortcut" @touchstart.stop.prevent="onShortcutTouchStart"
-           @touchmove.stop.prevent="onShortcutTouchMove"
-           @touchend.stop>
+  <transition name="fade">
+    <div class="cont-wrapper">
+      <v-header>联系人</v-header>
+      <div class="back" @click="contactBack">
+        <i class="icon icon-jiantouicon"></i>
+      </div>
+      <scroll @scroll="scroll"
+              :listen-scroll="listenScroll"
+              :probe-type="probeType"
+              :data="contacts"
+              class="listview"
+              ref="listview">
         <ul>
-          <li v-for="(item, index) in shortcutList" :data-index="index" class="item"
-              :class="{'current':currentIndex===index}">{{item}}
+          <li v-for="items in contacts" class="list-group" ref="listGroup">
+            <h2 class="list-group-title">{{items.title}}</h2>
+            <uL>
+              <li @click="selectItem(item)" v-for="item in items.items" class="list-group-item">
+                <span class="name">{{item.name}}</span>
+              </li>
+            </uL>
           </li>
         </ul>
-      </div>
-      <div class="list-fixed" ref="fixed" v-show="fixedTitle">
-        <h1 class="fixed-title">{{fixedTitle}} </h1>
-      </div>
-    </scroll>
-  </div>
+        <div class="list-shortcut" @touchstart.stop.prevent="onShortcutTouchStart"
+             @touchmove.stop.prevent="onShortcutTouchMove"
+             @touchend.stop>
+          <ul>
+            <li v-for="(item, index) in shortcutList" :data-index="index" class="item"
+                :class="{'current':currentIndex===index}">{{item}}
+            </li>
+          </ul>
+        </div>
+        <div class="list-fixed" ref="fixed" v-show="fixedTitle">
+          <h1 class="fixed-title">{{fixedTitle}} </h1>
+        </div>
+      </scroll>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -172,6 +174,12 @@
     right: 0;
     z-index: 10;
     background-color: #fff;
+    &.fade-enter-active, &fade-leave-active {
+      transition: all .3s;
+    }
+    &.fade-enter, &fade-leave-to {
+      transform: translate3D(-100px, 0, 0);
+    }
     .back {
       position: absolute;
       top: 0;

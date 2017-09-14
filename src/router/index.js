@@ -4,13 +4,11 @@ import helpPage from 'components/help-page/help-page'
 import newsPage from 'components/message-page/message-page'
 import findPage from 'components/find-page/find-page'
 import myPage from 'components/my-page/my-page'
-import loginPage from 'components/login-page/login-page'
-import Dynamic from 'components/my-page/dynamic/dynamic'
-import Schedule from 'components/my-page/schedule/schedule'
 import helpList from 'components/help-page/help-list/help-list'
 import helpDetails from 'components/help-page/help-list/help-details/help-details'
 import seekList from 'components/help-page/seek-list/seek-list'
 import release from 'components/help-page/seek-list/release/release'
+import System from 'components/system/system'
 
 
 Vue.use(Router)
@@ -65,28 +63,14 @@ export default new Router({
       component: findPage
     },
     {
-      path: '/loginPage',
-      name: '登录',
-      component: loginPage
-    },
-    {
       path: '/myPage',
       name: 'myPage',
       component: myPage,
-      children: [
-        {
-          path: '/myPage',
-          redirect: '/myPage/dynamic'
-        },
-        {
-          path: 'dynamic',
-          component: Dynamic
-        },
-        {
-          path: 'schedule',
-          component: Schedule
-        }
-      ]
+    },
+    {
+      path: '/system',
+      name: 'system',
+      component: System
     }
   ],
   linkActiveClass: "active"

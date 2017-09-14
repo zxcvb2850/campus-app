@@ -5,8 +5,7 @@
     </v-header>
     <div class="nav">
       <router-link to="/helpPage/helpList" class="nav-item">帮助</router-link>
-      <router-link to="/loginPage" class="nav-item" v-if="!isLogin">求助</router-link>
-      <router-link to="/helpPage/seekList" class="nav-item" v-if="isLogin">求助</router-link>
+      <router-link to="/helpPage/seekList" class="nav-item">求助</router-link>
     </div>
     <keep-alive>
       <router-view class="wrapper"></router-view>
@@ -17,14 +16,8 @@
 <script>
   import Scroll from "base/scroll/scroll"
   import VHeader from "base/header/header"
-  import {mapGetters} from "vuex"
 
   export default {
-    computed: {
-      ...mapGetters([
-        "isLogin"
-      ])
-    },
     components: {
       Scroll,
       VHeader

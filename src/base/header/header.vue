@@ -1,9 +1,9 @@
 <template>
-  <div class="header">
+  <header class="header">
     <h2 class="title">
       <slot></slot>
     </h2>
-  </div>
+  </header>
 </template>
 
 <script>
