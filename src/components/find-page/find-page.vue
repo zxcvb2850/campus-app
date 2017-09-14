@@ -37,7 +37,7 @@
     right: 0;
     .about-wrapper {
       position: absolute;
-      top:50%;
+      top: 50%;
       width: 100%;
       text-align: center;
       transform: translateY(-50%);

@@ -31,7 +31,9 @@
         </li>
       </ul>
     </scroll>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
