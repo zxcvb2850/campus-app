@@ -13,7 +13,7 @@ import myInfo from 'components/my-info/my-info'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -32,10 +32,16 @@ export default new Router({
           path: 'helpList',
           name: 'helpList',
           component: helpList,
+          meta: {
+            title: "未来生活（校园版）"
+          },
           children: [
             {
               path: ':id',
-              component: helpDetails
+              component: helpDetails,
+              meta: {
+                title: "帮助详情--未来生活（校园版）"
+              }
             }
           ]
         },
@@ -43,10 +49,16 @@ export default new Router({
           path: 'seekList',
           name: 'seekList',
           component: seekList,
+          meta: {
+            title: "求助--未来生活（校园版）"
+          },
           children: [
             {
               path: ':id',
-              component: helpDetails
+              component: helpDetails,
+              meta: {
+                title: "求助详情--未来生活（校园版）"
+              }
             }
           ]
         }
@@ -55,28 +67,53 @@ export default new Router({
     {
       path: '/newsPage',
       name: 'newsPage',
-      component: newsPage
+      component: newsPage,
+      meta: {
+        title: "消息--未来生活（校园版）"
+      }
     },
     {
       path: '/findPage',
       name: 'findPage',
-      component: findPage
+      component: findPage,
+      meta: {
+        title: "关于我们--未来生活（校园版）"
+      }
     },
     {
       path: '/myPage',
       name: 'myPage',
       component: myPage,
+      meta: {
+        title: "我的--未来生活（校园版）"
+      }
     },
     {
       path: '/system',
       name: 'system',
-      component: System
+      component: System,
+      meta: {
+        title: "设置--未来生活（校园版）"
+      }
     },
     {
       path: '/myInfo',
-      name: '我的信息',
-      component: myInfo
+      name: '个人信息',
+      component: myInfo,
+      meta: {
+        title: "个人信息--未来生活（校园版）"
+      }
     }
   ],
   linkActiveClass: "active"
 })
+
+router.beforeEach((to, from, next) => {
+  /* 路由发生变化修改页面title */
+  if (to.meta.title) {
+    document.title = to.meta.title;
+  }
+  next();
+})
+
+export default router
