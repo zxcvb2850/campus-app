@@ -3,7 +3,7 @@
     <div class="about-wrapper">
       <ol>
         <li class="item">
-          <span>项目名称:未来生活（校园版）</span>
+          <span>项目名称:未来生活H5WebApp（校园版）</span>
         </li>
         <li class="item">
           <span>团队名称：鑫鑫</span>
